@@ -70,7 +70,10 @@ class dispatcher
 
 		if (!$app->use_layout) $uselayout=false;
 
+		if (!empty($app->template))
+		$view->setTemplate($app->template);
 		$template = $view->getTemplate($action);
+
 
 		if ($app->use_view==true)
 		base::_loadTemplate($controller, $template, $viewvars, $uselayout);

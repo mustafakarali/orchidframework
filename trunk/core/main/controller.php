@@ -7,6 +7,7 @@ class controller
 	public $use_view=true;
 	public $use_layout=true;
 	public $post;
+	public $template;
 	private function __get($var)
 	{
 		if ($var == "params")
@@ -27,6 +28,19 @@ class controller
 	{
 		$this->redirectcontroller=$controller;
 		$this->redirectaction=$action;
+	}
+	
+	public function redirectUrl($controller, $action="base")
+	{
+		$baseurl = base::baseUrl();
+		$url = $baseurl."/{$controller}/{$action}";
+		header("location: {$url}");
+		die();
+	}
+	
+	public function setView($view)
+	{
+		$this->template = $view;
 	}
 	
 	function base(){}
