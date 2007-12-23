@@ -1,0 +1,6 @@
+<?
+class sessionsmodel extends activemodel 
+{
+	
+}
+?>

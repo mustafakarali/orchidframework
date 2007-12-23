@@ -1,0 +1,3 @@
+
+
+Total rows : <?=$count;?><br/>

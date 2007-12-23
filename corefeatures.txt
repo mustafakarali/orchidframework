@@ -1,0 +1,23 @@
+1. Support for Caching
+	a. SQLite Based Caching
+	b. MySQL Caching
+	c. Memcached Caching
+	
+2. Built in Unit Testing Support
+3. Fast and Lightweight
+4. Support for MySQL, MySQLi, SQLite, MSSQL and PgSQL using Native DAL and PDO
+5. Support for Layout
+6. Active Record
+7. Easy Application Setup
+8. Flexible Configuration Management
+9. Builtin Profiling
+10. I18N support
+11. Session Manager (Native and DB Based)
+12. Excellent support for benchmarking and profiling
+13. Builtin JSON Encoder and Decoder
+14. Google Chart API Support
+15. Bundled JS Libraries with Gzip Support
+	a. Prototype
+	b. JQuery
+	c. SWFObject
+16. Builtin Library for jQuery Effects and AJAX Support
