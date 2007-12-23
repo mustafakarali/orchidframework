@@ -15,7 +15,7 @@ $configs['db']['development']['dbpwd']="root1234";
 $configs['db']['development']['persistent']=true;
 $configs['db']['development']['dbtype']="mysql";
 
-$configs['use_session_db']=true;
+$configs['use_session_db']=false;
 $configs['session_table']="sessions";
 $configs['css_dir']="styles";
 $configs['google_map_api']="ABQIAAAAK49OOamo8inlPm0oVAsu5hT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQIcWTaKgysPazGPZPIbdbDZ5Jf1w";
