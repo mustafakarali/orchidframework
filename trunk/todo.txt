@@ -1,0 +1,24 @@
+Add JSON - Done (PEAR::SERVICE_JSON)
+Add AJAX using JQuery
+Add GoogleChart Class
+Add Session Db Suppport - DONE
+
+Added use_view support which is set as true by default;
+
+Add Uni Form Support
+Add fValidator
+add CRIR
+add SWFObject
+add Unibtrusive Date Picker
+Add Scalable Button Support
+Add CSS Loader
+Add Particletree Button Fix
+Add PNGFix
+add Google Maps Support (Done using Phoogle) - Add GeoLocation Finder using Yahoo GeoCode service
+Add GData Support
+Add dateJS
+Add NicEdit
+Add OpenID
+
+Need to stop default gzip compression for JS
+Add OpenID Client Support
