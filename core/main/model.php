@@ -1,10 +1,17 @@
 <?
 class model{
 	private $loaded = array();
+	private $nullmodel= false;
 	private function __get($model)
 	{
+		$_model= $model;
 		$model .="model";
 		$modelfile = "app/models/{$model}.php";
+
+		if (!file_exists($modelfile)){
+			$this->nullmodel=true;
+			$modelfile = "core/models/nullmodel.php";
+		}
 
 		$config = loader::load("config");
 
@@ -13,7 +20,10 @@ class model{
 			include_once($modelfile);
 			if (empty($this->loaded[$model]))
 			{
+				if (!$this->nullmodel)
 				$this->loaded[$model]=new $model();
+				else 
+				$this->loaded[$model]=new nullmodel($_model);
 			}
 			$modelobj = $this->loaded[$model];
 			if ($config->auto_model_association){
@@ -46,8 +56,8 @@ class model{
 			$obj->$key = $value;
 		}
 	}
-	
-	
+
+
 
 
 }

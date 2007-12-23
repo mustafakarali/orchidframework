@@ -7,7 +7,7 @@
  * @copyright 	New BSD License
  * @version 	0.1	
  */
-error_reporting(E_ALL);
+error_reporting(E_ALL - (E_NOTICE+E_WARNING));
 //include_once("core/libraries/base.php");
 //include_once("core/libraries/unittest.php");
 /*set_include_path(get_include_path().PATH_SEPARATOR.getcwd()."/core/main");

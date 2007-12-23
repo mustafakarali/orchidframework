@@ -1,0 +1,6 @@
+<?
+class nullmodel extends activemodel 
+{
+	
+}
+?>
