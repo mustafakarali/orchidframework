@@ -24,8 +24,10 @@ class dispatcher
 		}*/
 
 		if (count($params)>=1){
-			if ("unittest"==$params[count($params)-1] || '1'==$_POST['unittest'])
-			unittest::setUp();
+			//if (!empty($params[count($params)-1]) || !empty($_POST['unittest'])){
+				if ("unittest"==$params[count($params)-1] || '1'==$_POST['unittest'])
+				unittest::setUp();
+			//}
 		}
 
 		$redirect=true;
@@ -37,16 +39,14 @@ class dispatcher
 			}
 			require_once($controllerfile);
 			$app = new $controller();
-			if (empty($app->use_layout)) //so that you can also override the use_layout behavior
-			$app->use_layout = true; 
-			$app->use_view = true; 
 			$app->setParams($params);
+			$app->setPostParams($router->getPostParams());
 			$app->$action();
-			
+
 			//check if the controller calls for a redirect
-			if(empty($app->redirectcontroller)) 
+			if(empty($app->redirectcontroller))
 			$redirect=false;
-			else 
+			else
 			{
 				//die("called a redirect");
 				$controller = $app->redirectcontroller;
@@ -71,12 +71,12 @@ class dispatcher
 		if (!$app->use_layout) $uselayout=false;
 
 		$template = $view->getTemplate($action);
-		
+
 		if ($app->use_view==true)
 		base::_loadTemplate($controller, $template, $viewvars, $uselayout);
-		else 
+		else
 		echo $rawoutput;
-		
+
 		if (isset($start))
 		echo "<div style='clear:both;'><p style='padding-top:25px;' >Total time for dispatching is : ".(microtime(true)-$start)." seconds.</p></div>";
 		$output = ob_get_clean();
