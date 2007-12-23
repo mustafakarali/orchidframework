@@ -63,7 +63,23 @@ class router
 
 	public function getParams()
 	{
+		if (count($_POST)>0)
+		{
+			foreach ($_POST as $key=>$val)
+			$this->params[$key]=$val;
+		}
 		return $this->params;
+	}
+	
+	public function getPostParams()
+	{
+		$post = new stdClass();
+		if (count($_POST)>0)
+		{
+			foreach ($_POST as $key=>$val)
+			$post->$key = $val;
+		}
+		return $post;
 	}
 
 }

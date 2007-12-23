@@ -27,6 +27,7 @@ class base{
 
 	public static function _loadTemplate($controller, $template, $vars, $uselayout=false){
 		extract($vars);
+		$baseurl = base::baseUrl();
 		if ($uselayout)
 		ob_start();
 		$templatefile ="app/views/{$controller}/{$template}.php";
