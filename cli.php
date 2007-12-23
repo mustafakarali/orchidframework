@@ -18,11 +18,9 @@ case "skeleton":
 		mkdir(getcwd()."/app/models");
 		mkdir(getcwd()."/app/views");
 		
-		$str = "
-		<?
-		\$configs['base_url']=\"please set something here\";
-		?>
-		";
+		$str = "<?
+		\$configs['base_url']=\"please set your application url here\";
+		?>";
 		$filename = getcwd()."/app/config/configs.php";
 		file_put_contents($filename,$str);
 	}
@@ -41,8 +39,7 @@ case "controller":
 	if (file_exists($filename))
 	echo "This controller already exists";
 	else{
-		$str ="
-<?
+		$str ="<?
 class {$controllername} extends controller
 {
 	function base()
