@@ -38,7 +38,7 @@ function __autoload($object)
 			include_once($filename);
 			break;
 		}
-		
+	}
 	
 	
 }
