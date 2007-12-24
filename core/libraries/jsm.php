@@ -51,7 +51,7 @@ class jsm
 	{
 		$base = base::baseUrl();
 		$script = $base."/app/js/{$filename}.js";
-		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js={$script}' ></script>\n";
+		echo "<script type='text/javascript' src='{$base}/app/js/gzip.php?js={$script}' ></script>\n";
 	}
 
 	function loadButtonJS()
@@ -76,6 +76,15 @@ class jsm
 
 		</script>
 		<?
+	}
+	
+	function addSWFObject()
+	{
+		$base = base::baseUrl();
+		if ($this->gzipenabled)
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=swfobject.js' ></script>\n";
+		else
+		echo "<script type='text/javascript' src='{$base}/core/js/swfobject.js' ></script>\n";
 	}
 
 	function __construct()
