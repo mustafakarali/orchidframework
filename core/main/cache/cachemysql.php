@@ -6,6 +6,7 @@ class cachemysql implements cachemanager
 	private $cache = array();
 	public function setup($cacheinfo)
 	{
+		base::pr($cacheinfo);
 		if (!empty($cacheinfo)) {
 			$dbname = $cacheinfo['dbname'];
 			$dbhost = $cacheinfo['dbhost'];
@@ -41,6 +42,7 @@ class cachemysql implements cachemanager
 		$content = serialize(array($key=>$value));
 		$marker = $key;
 		$query = "REPLACE INTO cache (marker, content, valid, modified) values('{$marker}', '{$content}','{$valid}','{$modified}')";
+		mysql_query($query);
 		$this->cache[$key]==$value;
 	}
 
