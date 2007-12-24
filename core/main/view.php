@@ -44,5 +44,17 @@ class view
 	{
 		return loader::load($var);
 	}
+
+	public function addComponentView($controller,$view="base")
+	{
+		$basepath = base::basePath();
+		$filepath = $basepath."/app/views/{$controller}/{$view}.php";
+		include($filepath);
+	}
+	
+	public function addRenderedView($url)
+	{
+		include($url);
+	}
 }
 ?>

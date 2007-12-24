@@ -14,5 +14,11 @@ class cssm
 		$basepath = base::baseUrl();
 		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/pt.php\"; </style>";
 	}
+	
+	public function addCSS($filename,$extension="css")
+	{
+		$basepath = base::baseUrl();
+		echo "<style type=\"text/css\"> @import \"{$basepath}/app/styles/{$filename}.{$extension}\"; </style>";
+	}
 }
 ?>
