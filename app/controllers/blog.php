@@ -1,4 +1,3 @@
-
 <?
 class blog extends controller
 {
