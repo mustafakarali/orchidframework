@@ -13,14 +13,14 @@ class cachesqlite implements cachemanager
 		if (!empty($cacheinfo)) {
 			$this->cachefile = $cacheinfo['dbname'];
 		}
-		
+
 		$this->cachefile = $this->cachebase.$this->cachefile;
 
 		if (!file_exists($this->cachefile))
 		{
 			$this->cachedb = sqlite_open($this->cachefile,0666);
-			sqlite_exec("create table cache ( id INTEGER AUTOINCREAMENT PRIMARY KEY, marker VARCHAR UNIQUE, content TEXT, extra VARCHAR, modified INT, expired INTEGER DEFAULT 0)  ",$this->cachedb);
-			sqlite_exec("create index marker on cache (marker)  ",$this->cachedb);
+			sqlite_exec("create table cache ( marker VARCHAR PRIMARY KEY, content TEXT, modified INT, valid INT, expired INTEGER DEFAULT 0)  ",$this->cachedb);
+			//sqlite_exec("create index marker on cache (marker)  ",$this->cachedb);
 		}
 		else
 		$this->cachedb = sqlite_open($this->cachefile,0666);
@@ -29,75 +29,66 @@ class cachesqlite implements cachemanager
 
 	public function get($key)
 	{
-		if (isset($this->cache[$key]))
+
+		if (!$this->isExpired($key))
 		return $this->cache[$key];
-		else
-		return array();
+			else 
+		$this->invalidate($key);
+		return "";
 	}
 
-	public function set($key, $value, $extra = null)
+	public function set($key, $value, $time=86400)
 	{
 
 		$modified = time();
-		$content = serialize($value);
+		$valid = time()+$time;
+		$content = serialize(array($key=>$value));
 		$marker = $key;
-
-		$data = sqlite_query("select * from cache where marker='{$key}'",$this->cachedb);
-
-		if (sqlite_num_rows($data)==0)
-		{
-			//insert new row
-			$query = "INSERT INTO cache (id, marker, content, extra, modified) values(null, '{$marker}', '{$content}','{$extra}','{$modified}')";
-		}
-		else
-		{
-			//update
-			if (!empty($extra))
-			$query = "UPDATE cache set content='{$content}', extra ='{$extra}', modified = '{$modified}', expired=1 WHERE marker='{$marker}'";
-			else
-			$query = "UPDATE cache set content='{$content}', modified = '{$modified}', expired=1 WHERE marker='{$marker}'";
-		}
-
-		//die($query);
+		$query = "REPLACE INTO cache (marker, content, valid, modified) values('{$marker}', '{$content}','{$valid}','{$modified}')";
 		sqlite_query($query, $this->cachedb);
+		$this->cache[$key]==$value;
 	}
 
 
-	public function isExpired($key, $time=null)
+	public function isExpired($key)
 	{
-		if (!empty($time)){
-			$mintime = time()-$time;
-			$data = sqlite_query("SELECT * FROM cache WHERE marker='{$key}' AND modifed>={$mintime}",$this->cachedb);
-		}
-		else
-		$data = sqlite_query("SELECT * FROM cache WHERE marker='{$key}'",$this->cachedb);
-		$row = sqlite_fetch_array($data,SQLITE_ASSOC);
-		
-		
-		if (sqlite_num_rows($data)==0){
-			$this->cache[$key]==array();
-			return true;
-		}
-		
+		$mintime = time();
+		$data = sqlite_query("SELECT * FROM cache WHERE marker='{$key}' AND valid>={$mintime}",$this->cachedb);
 
-		if ($row['expired']=='0')
-		{
-			$this->cache[$key]==array();;
+		$row = sqlite_fetch_array($data,SQLITE_ASSOC);
+
+
+		if (sqlite_num_rows($data)==0){
+			$this->cache[$key]=="__expired__";
 			return true;
 		}
-		
-		
-		
+
+
+		if ($row['expired']=='1')
+		{
+			$this->cache[$key]=="__expired__";
+			return true;
+		}
+
+
+
 		//die(print_r(unserialize($row['content'])));
-		
-		$this->cache[$key]=unserialize($row['content']);
+
+		$_temp = unserialize($row['content']);
+		$this->cache[$key] = $_temp[$key];
 		//die($this->cache[$key]);
 		return false;
 	}
-	
-	public function invalidate($key)
+
+	public function invalidate($key, $forced=false)
 	{
-		$query = "UPDATE cache SET content='', expired=0 WHERE marker='{$key}'";
+		$mintime = time();
+		if (!$forced)
+		$query = "DELETE FROM cache WHERE marker='{$key}' and valid<{$mintime} ";
+		else
+		$query = "DELETE FROM cache WHERE marker='{$key}'";
+
+
 		sqlite_query($query,$this->cachedb);
 		unset($this->cache[$key]);
 	}

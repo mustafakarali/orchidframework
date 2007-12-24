@@ -14,9 +14,9 @@ class cachemysql implements cachemanager
 			$dbpersistence = $cacheinfo['dbpersistence'];
 			if ($dbpersistence)
 			$this->cachedb  = mysql_pconnect($dbhost, $dbuser, $dbpass,true);
-			else 
+			else
 			$this->cachedb = mysql_connect($dbhost,$dbuser,$dbpass,true);
-			
+
 			mysql_select_db($dbname,$this->cachedb);
 		}
 
@@ -25,75 +25,60 @@ class cachemysql implements cachemanager
 
 	public function get($key)
 	{
-		if (isset($this->cache[$key]))
+
+		if (!$this->isExpired($key))
 		return $this->cache[$key];
 		else
-		return array();
+		$this->invalidate($key);
+		return "";
 	}
 
-	public function set($key, $value, $extra = null)
+	public function set($key, $value, $time=86400)
 	{
 
 		$modified = time();
-		$content = serialize($value);
+		$valid = time()+$time;
+		$content = serialize(array($key=>$value));
 		$marker = $key;
-
-		$data = mysql_query("select * from cache where marker='{$key}'",$this->cachedb);
-
-		if (mysql_num_rows($data)==0)
-		{
-			//insert new row
-			$query = "INSERT INTO cache (id, marker, content, extra, modified) values(null, '{$marker}', '{$content}','{$extra}','{$modified}')";
-		}
-		else
-		{
-			//update
-			if (!empty($extra))
-			$query = "UPDATE cache set content='{$content}', extra ='{$extra}', modified = '{$modified}', expired=1 WHERE marker='{$marker}'";
-			else
-			$query = "UPDATE cache set content='{$content}', modified = '{$modified}', expired=1 WHERE marker='{$marker}'";
-		}
-
-		//die($query);
-		mysql_query($query, $this->cachedb);
+		$query = "REPLACE INTO cache (marker, content, valid, modified) values('{$marker}', '{$content}','{$valid}','{$modified}')";
+		$this->cache[$key]==$value;
 	}
 
 
 	public function isExpired($key, $time=null)
 	{
-		if (!empty($time)){
-			$mintime = time()-$time;
-			$data = mysql_query("SELECT * FROM cache WHERE marker='{$key}' AND modifed>={$mintime}",$this->cachedb);
-		}
-		else
-		$data = mysql_query("SELECT * FROM cache WHERE marker='{$key}'",$this->cachedb);
-		$row = mysql_fetch_assoc($data);
-		
-		
-		if (mysql_num_rows($data)==0){
-			$this->cache[$key]==array();
-			return true;
-		}
-		
 
-		if ($row['expired']=='0')
-		{
-			$this->cache[$key]==array();;
+		$mintime = time();
+		$data = mysql_query("SELECT * FROM cache WHERE marker='{$key}' AND valid>={$mintime}",$this->cachedb);
+
+		$row = mysql_fetch_assoc($data);
+
+
+		if (mysql_num_rows($data)==0){
+			$this->cache[$key]=="__expired__";
 			return true;
 		}
-		
-		
-		
-		//die(print_r(unserialize($row['content'])));
-		
-		$this->cache[$key]=unserialize($row['content']);
-		//die($this->cache[$key]);
+
+
+		if ($row['expired']=='1')
+		{
+			$this->cache[$key]=="__expired__";
+			return true;
+		}
+
+		$_temp = unserialize($row['content']);
+		$this->cache[$key] = $_temp[$key];
 		return false;
 	}
-	
-	public function invalidate($key)
+
+	public function invalidate($key, $forced=false)
 	{
-		$query = "UPDATE cache SET expired=0 WHERE marker='{$key}'";
+		$mintime = time();
+		if (!$forced)
+		$query = "DELETE FROM cache WHERE marker='{$key}' and valid<{$mintime} ";
+		else
+		$query = "DELETE FROM cache WHERE marker='{$key}'";
+		
 		mysql_query($query,$this->cachedb);
 		unset($this->cache[$key]);
 	}

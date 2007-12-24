@@ -20,9 +20,9 @@ class CacheMemcache implements cachemanager
 		return false;
 
 	}
-	public function set($key, $value, $expire=4320){
+	public function set($key, $value, $time=86400){
 		if (!empty($key) && !empty($value)){
-			$this->memcached->set($key,$value,null,$expire);
+			$this->memcached->set($key,$value,null,$time);
 			return true;
 		}
 		return false;
@@ -32,7 +32,7 @@ class CacheMemcache implements cachemanager
 		if (empty($val)) return true;
 		return false;
 	}
-	public function invalidate($key){
+	public function invalidate($key, $forced=false){
 		if (!empty($key)){
 			$this->memcached->delete($key);
 			return true;

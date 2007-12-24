@@ -20,9 +20,9 @@ class cache
 		}
 	}
 	
-	public function set($key, $content, $extra = null)
+	public function set($key, $content, $time = 86400)
 	{
-		$this->cacheengine->set($key, $content, $extra);
+		$this->cacheengine->set($key, $content, $time);
 	}
 	
 	public function get($key)
@@ -30,14 +30,14 @@ class cache
 	 	return  $this->cacheengine->get($key);
 	}
 	
-	public function isExpired($key, $time=null)
+	public function isExpired($key)
 	{
-	 	return  $this->cacheengine->isExpired($key, $time);
+	 	return  $this->cacheengine->isExpired($key);
 	}
 	
-	public function invalidate($key)
+	public function invalidate($key, $forced=false)
 	{
-	 	return  $this->cacheengine->invalidate($key);
+	 	return  $this->cacheengine->invalidate($key, $forced);
 	}
 }
 ?>
