@@ -8,7 +8,7 @@ class unittest
 	{
 		$config = loader::load("config");
 		if ($config->unit_test_enabled){
-			
+
 			self::$results = array();
 			self::$testmode = true;
 		}
@@ -102,46 +102,58 @@ class unittest
 	public static function assertContains($needle, $haystack, $message = '')
 	{
 		if (!self::$testmode) return 0;
-		if (in_array($needle,$haystack))
-		{
-			$result = 1;
-			self::saveResult("Array has a needle named '{$needle}'", "Array has a needle named '{$needle}'", $result);
-			return ;
+		if (is_array($haystack)){
+			if (in_array($needle,$haystack))
+			{
+				$result = 1;
+				self::saveResult("Array has a needle named '{$needle}'", "Array has a needle named '{$needle}'", $result);
+				return ;
+			}
+			self::saveResult("Array has a needle named '{$needle}'", "Array has not a needle named '{$needle}'", $result);
 		}
-		self::saveResult("Array has a needle named '{$needle}'", "Array has not a needle named '{$needle}'", $result);
+		else 
+		{
+			if (strpos($haystack,$needle)!==false)
+			{
+				$result = 1;
+				self::saveResult("Haystack has a needle named '{$needle}'", "Haystack has a needle named '{$needle}'", $result);
+				return ;
+			}
+			self::saveResult("Haystack has a needle named '{$needle}'", "Haystack has not a needle named '{$needle}'", $result);
+		}
 
 	}
-	
+
 	public static function assertNull($object)
 	{
 		$this->assertTrue(isnull($object));
 	}
-	
+
 	public static function assertNotTrue($object)
 	{
 		if (!self::$testmode) return 0;
 		if (false==$object) $result = "passed";
 		self::saveResult(true, $object, $result);
 	}
-	
 
-	
+
+
 	public static function assertIdentical($object, $constant)
 	{
 		$this->assertTrue($object===$constant);
 	}
-	
+
 	public static function assertNotIdentical($object, $constant)
 	{
 		$this->assertTrue($object!==$constant);
 	}
-	
+
 	public static function assertPattern($string, $pattern)
 	{
 		$match = preg_match($pattern, $string);
 		$this->assertTrue($match);
 	}
-	
+
 	public static function assertInstance($object1, $object2)
 	{
 		$this->assertTrue($object1 instanceof $object2);
