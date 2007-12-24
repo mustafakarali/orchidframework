@@ -7,8 +7,8 @@ Added use_view support which is set as true by default;
 
 Add Uni Form Support
 Add fValidator
-add CRIR
-add SWFObject
+add CRIR 
+add SWFObject - Done
 add Unibtrusive Date Picker
 Add Scalable Button Support
 Add CSS Loader
@@ -22,3 +22,10 @@ Add OpenID
 
 Need to stop default gzip compression for JS
 Add OpenID Client Support
+
+Add Component View Loading
+Add Flickr Lib
+Add ShareThis
+Add SWF Player
+
+Need Some Improvement in Caching Engine
