@@ -20,12 +20,13 @@ $configs['cache_mysql']['dbhost']="";
 $configs['cache_mysql']['dbpass']="";
 $configs['cache_mysql']['dbpersistence']=false;
 
-$configs['cache_memcached']['server1']="";
-$configs['cache_memcached']['server2']="";
-$configs['cache_memcached']['server3']="";
-$configs['cache_memcached']['server4']="";
+$configs['cache_memcache']['servers'][]=array("host"=>"127.0.0.1","port"=>"11211");
+$configs['cache_memcache']['servers'][]=array("host"=>"","port"=>"");
+$configs['cache_memcache']['servers'][]=array("host"=>"","port"=>"");
 
-$configs['cache_source'] = "sqlite"; //or cache_mysql or cache_memcached
+
+$configs['cache_source'] = "sqlite"; //or mysql or memcache
+$configs['cache_source'] = "memcache"; //or mysql or memcache
 
 $configs['allowed_url_chars'] = "/[^A-z0-9\/\^]/";
 

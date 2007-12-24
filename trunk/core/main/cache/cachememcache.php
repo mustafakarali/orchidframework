@@ -5,7 +5,7 @@ class CacheMemcache implements cachemanager
 	private $memcached;
 	public function __construct()
 	{
-		$this->memcached = new Memcached();
+		$this->memcached = new Memcache();
 	}
 	public function setup($cacheinfo){
 		$servers = $cacheinfo['servers'];
