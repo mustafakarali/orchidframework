@@ -1,7 +1,5 @@
 <?
-echo "Hello World";
-echo getcwd();
-var_dump($argv);
+echo "Welcome to Command Line Tool of Orchid \n";
 
 switch ($argv[1] ){
 

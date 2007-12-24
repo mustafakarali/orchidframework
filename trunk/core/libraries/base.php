@@ -43,12 +43,27 @@ class base{
 			$layoutdata = ob_get_clean();
 			$layoutfilelocal = "app/views/{$controller}/{$controller}.php";
 			$layoutfileglobal = "app/views/layouts/{$controller}.php";
-				
+
 			if (file_exists($layoutfilelocal))
 			include_once($layoutfilelocal);
-			else 
+			else
 			include_once($layoutfileglobal);
 		}
+	}
+
+
+	function isIE()
+	{
+		$agent = $_SERVER['HTTP_USER_AGENT'];
+		if (strpos($agent,"MSIE")!==false) return true;
+		return false;
+	}
+
+	function isIE7()
+	{
+		$agent = $_SERVER['HTTP_USER_AGENT'];
+		if (strpos($agent,"MSIE 7.0")!==false) return true;
+		return false;
 	}
 }
 ?>
