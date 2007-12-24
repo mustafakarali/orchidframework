@@ -86,5 +86,8 @@ class welcome extends controller
 	
 	function pt(){}
 	
+	function flv()
+	{}
+	
 }
 ?>

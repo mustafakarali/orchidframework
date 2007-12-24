@@ -86,6 +86,15 @@ class jsm
 		else
 		echo "<script type='text/javascript' src='{$base}/core/js/swfobject.js' ></script>\n";
 	}
+	
+	function addOrchidHelper()
+	{
+		$base = base::baseUrl();
+		if ($this->gzipenabled)
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=general.php' ></script>\n";
+		else
+		echo "<script type='text/javascript' src='{$base}/core/js/general.php' ></script>\n";
+	}
 
 	function __construct()
 	{
