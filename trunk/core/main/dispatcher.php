@@ -4,7 +4,6 @@ class dispatcher
 	public static function dispatch($router)
 	{
 		global $app;
-		//$cache = loader::load("cache");
 		ob_start();
 		$config = loader::load("config");
 
@@ -14,20 +13,9 @@ class dispatcher
 		$action = $router->getAction();
 		$params = $router->getParams();
 
-		//$cache->invalidate("abcde");
-
-		/*if (!$cache->isExpired("abcde"))
-		{
-		$content = $cache->get("abcde");
-		$content = base64_decode($content['content']);
-		die($content);
-		}*/
-
 		if (count($params)>=1){
-			//if (!empty($params[count($params)-1]) || !empty($_POST['unittest'])){
-				if ("unittest"==$params[count($params)-1] || '1'==$_POST['unittest'])
-				unittest::setUp();
-			//}
+			if ("unittest"==$params[count($params)-1] || '1'==$_POST['unittest'])
+			unittest::setUp();
 		}
 
 		$redirect=true;
@@ -84,7 +72,6 @@ class dispatcher
 		echo "<div style='clear:both;'><p style='padding-top:25px;' >Total time for dispatching is : ".(microtime(true)-$start)." seconds.</p></div>";
 		$output = ob_get_clean();
 
-		//$cache->set("abcde",array("content"=>base64_encode($output)));
 		echo $output;
 
 
