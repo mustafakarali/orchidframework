@@ -11,7 +11,7 @@ class view
 {
 	private $vars=array();
 	private $template;
-	
+
 	public function __construct()
 	{
 		$config = loader::load("config");
@@ -22,24 +22,24 @@ class view
 		$this->vars[$key]=$value;
 		//base::pr($this->vars);
 	}
-	
+
 	public function getVars(&$controller=null)
 	{
 		if (!empty($controller)) $this->vars['app']=$controller;
 		return $this->vars;
 	}
-	
+
 	public function setTemplate($template)
 	{
 		$this->template = $template;
 	}
-	
+
 	public function getTemplate($controller=null)
 	{
 		if (empty($this->template)) return $controller;
 		return $this->template;
 	}
-	
+
 	private function __get($var)
 	{
 		return loader::load($var);
@@ -51,10 +51,39 @@ class view
 		$filepath = $basepath."/app/views/{$controller}/{$view}.php";
 		include($filepath);
 	}
-	
-	public function addRenderedView($url)
+
+	public function addRenderedView($url, $postparams, $return=true)
 	{
-		include($url);
+		//header("content-type: text/html; charset=utf-8");
+		$url= urldecode($url);
+		$content = http_build_query($postparams);
+		$result = $this->do_post_request($url,$content);
+		if ($return)
+		return $result;
+		else 
+		echo $result;
+	}
+
+	private function do_post_request($url, $data, $optional_headers = null)
+	{
+		/* Thanks to Wez Furlong and Sara Goleman */
+		$params = array('http' => array(
+		'method' => 'POST',
+		'content' => $data
+		));
+		if ($optional_headers !== null) {
+			$params['http']['header'] = $optional_headers;
+		}
+		$ctx = stream_context_create($params);
+		$fp = @fopen($url, 'rb', false, $ctx);
+		if (!$fp) {
+			throw new Exception("Problem with $url, $php_errormsg");
+		}
+		$response = @stream_get_contents($fp);
+		if ($response === false) {
+			throw new Exception("Problem reading data from $url, $php_errormsg");
+		}
+		return $response;
 	}
 }
 ?>
