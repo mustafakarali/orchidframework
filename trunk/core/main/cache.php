@@ -18,6 +18,8 @@ class cache
 			$this->cacheengine = new $cacheobject();
 			$this->cacheengine->setup($cacheinfo);
 		}
+		else 
+		throw  new Exception("Please provide cache engine details in configuration file");
 	}
 	
 	public function set($key, $content, $time = 86400)

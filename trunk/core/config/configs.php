@@ -14,19 +14,18 @@ $configs['unit_test_enabled']=false;
 
 $configs['cache_sqlite']['dbname']="sqlite.sq2"; //absolute path
 
-$configs['cache_mysql']['dbname']="";
-$configs['cache_mysql']['dbuser']="";
-$configs['cache_mysql']['dbhost']="";
-$configs['cache_mysql']['dbpass']="";
-$configs['cache_mysql']['dbpersistence']=false;
+$configs['cache_mysql']['dbname']="test";
+$configs['cache_mysql']['dbuser']="root";
+$configs['cache_mysql']['dbhost']="localhost";
+$configs['cache_mysql']['dbpass']="root1234";
+$configs['cache_mysql']['dbpersistence']=true;
 
 $configs['cache_memcache']['servers'][]=array("host"=>"127.0.0.1","port"=>"11211");
 $configs['cache_memcache']['servers'][]=array("host"=>"","port"=>"");
 $configs['cache_memcache']['servers'][]=array("host"=>"","port"=>"");
 
 
-$configs['cache_source'] = "sqlite"; //or mysql or memcache
-$configs['cache_source'] = "memcache"; //or mysql or memcache
+$configs['cache_source'] = ""; //or mysql or memcache
 
 $configs['allowed_url_chars'] = "/[^A-z0-9\/\^]/";
 
