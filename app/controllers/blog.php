@@ -75,6 +75,17 @@ class blog extends controller
 		$this->redirectUrl("blog","login");
 	}
 
+	function test()
+	{
+		$usersmodel = $this->model->users;
+		/*$usersmodel->username = "test";
+		$usersmodel->password = "testpass";
+		$usersmodel->insert();*/
+		
+		$usersmodel->find("username = 'test'");
+		$usersmodel->username = "tester";
+		$usersmodel->update();
+	}
 	function __construct()
 	{
 		$this->session = loader::load("session");

@@ -21,7 +21,7 @@ class activemodel
 		$tablename = $this->tableName();
 		$db = loader::load("db");
 		$db->execute("show fields from {$tablename}");
-		echo $db->count();
+		//echo $db->count();
 		$fields=$values=array();
 		while($row = $db->getRow())
 		{
@@ -40,7 +40,7 @@ class activemodel
 		$tablename = $this->tableName();
 		$db = loader::load("db");
 		$db->execute("show fields from {$tablename}");
-		echo $db->count();
+		//echo $db->count();
 		$fields=$values=array();
 		while($row = $db->getRow())
 		{
@@ -59,6 +59,8 @@ class activemodel
 		}
 		else
 		$query = "UPDATE {$tablename} SET ".join(",",$values)." WHERE {$condition}";
+		
+		die($query);
 		$result = $db->execute($query);
 
 		//die($tablename);
@@ -99,8 +101,13 @@ class activemodel
 			$results[] = $data;
 		}
 
-		if (count($results)==1)
-		$results = $results[0]; //for accessing like getName(), getField()
+		if (count($results)==1){
+			foreach($results[0] as $key=>$value)
+			{
+				$this->$key = $value;
+			}
+			$results = $results[0]; //for accessing like getName(), getField()
+		}
 
 		//base::pr($results);
 		//die();
@@ -120,6 +127,10 @@ class activemodel
 			$db->execute($query);
 			$result = $db->getRow();
 			$this->results = $result;
+			foreach($result as $key=>$value)
+			{
+				$this->$key = $value;
+			}
 			return $result;
 		}
 	}
