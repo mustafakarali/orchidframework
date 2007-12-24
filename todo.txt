@@ -10,15 +10,12 @@ Add fValidator
 add CRIR 
 add SWFObject - Done
 add Unibtrusive Date Picker
-Add Scalable Button Support
+Add Scalable Button Support -DOne
 Add CSS Loader
-Add Particletree Button Fix
-Add PNGFix
+Add Particletree Button Fix - Done
+Add PNGFix 
 add Google Maps Support (Done using Phoogle) - Add GeoLocation Finder using Yahoo GeoCode service
-Add GData Support
-Add dateJS
-Add NicEdit
-Add OpenID
+Add OpenID - WIP
 
 Need to stop default gzip compression for JS
 Add OpenID Client Support
