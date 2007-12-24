@@ -6,7 +6,6 @@ class cachemysql implements cachemanager
 	private $cache = array();
 	public function setup($cacheinfo)
 	{
-		base::pr($cacheinfo);
 		if (!empty($cacheinfo)) {
 			$dbname = $cacheinfo['dbname'];
 			$dbhost = $cacheinfo['dbhost'];
