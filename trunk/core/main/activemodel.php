@@ -60,7 +60,7 @@ class activemodel
 		else
 		$query = "UPDATE {$tablename} SET ".join(",",$values)." WHERE {$condition}";
 		
-		die($query);
+		//die($query);
 		$result = $db->execute($query);
 
 		//die($tablename);
