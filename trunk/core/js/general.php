@@ -17,4 +17,3 @@ function orchid()
 	}
 }
 
-var orchid = new orchid();
