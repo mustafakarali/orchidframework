@@ -26,5 +26,13 @@ class cssm
 		$basepath = base::baseUrl();
 		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/thickbox.css\"; </style>";
 	}
+	
+	public function addBluePrint($iehack=true)
+	{
+		$basepath = base::baseUrl();
+		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/bp.css\"; </style>";
+		if ($iehack)
+		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/ie.css\"; </style>";
+	}
 }
 ?>
