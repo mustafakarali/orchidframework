@@ -20,5 +20,11 @@ class cssm
 		$basepath = base::baseUrl();
 		echo "<style type=\"text/css\"> @import \"{$basepath}/app/styles/{$filename}.{$extension}\"; </style>";
 	}
+	
+	public function addThickBox()
+	{
+		$basepath = base::baseUrl();
+		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/thickbox.css\"; </style>";
+	}
 }
 ?>

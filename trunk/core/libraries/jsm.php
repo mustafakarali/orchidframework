@@ -95,11 +95,33 @@ class jsm
 		else
 		echo "<script type='text/javascript' src='{$base}/core/js/general.php' ></script>\n";
 	}
+	
+	function addThickBox()
+	{
+		$this->loadJquery();
+		$base = base::baseUrl();
+		if ($this->gzipenabled)
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=thickbox.js' ></script>\n";
+		else
+		echo "<script type='text/javascript' src='{$base}/core/js/thickbox.js' ></script>\n";
+		
+		$lib = loader::load("library");
+		$lib->cssm->addThickBox();
+	}
+	
+	function addGenericVars()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript'>";
+		echo "var baseurl='{$base}';";
+		echo "</script>";
+	}
 
 	function __construct()
 	{
 		$config = loader::load("config");
 		$this->gzipenabled = $config->js_gzip_enabled;
+		$this->addGenericVars();
 	}
 }
 ?>
