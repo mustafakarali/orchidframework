@@ -1,4 +1,4 @@
-<?
+<?php
 class loader
 {
 	private static $loaded = array();

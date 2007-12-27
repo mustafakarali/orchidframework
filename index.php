@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * orchid bootstrap file. used internally to process request and dispatch
  * with the help of router and dispatcher.

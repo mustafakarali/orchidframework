@@ -1,4 +1,4 @@
-<?
+<?php
 define ("FETCH_ASSOC",1);
 define ("FETCH_ROW",2);
 define ("FETCH_BOTH",3);

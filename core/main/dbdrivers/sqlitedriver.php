@@ -1,4 +1,4 @@
-<?
+<?php
 class sqlitedriver extends abstractdbdriver
 {
 	public function __construct($dbinfo)

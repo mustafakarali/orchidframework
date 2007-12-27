@@ -1,4 +1,4 @@
-<?
+<?php
 /*
    CREATE TABLE `sessions` (
   `id` varchar(32) NOT NULL,

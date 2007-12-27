@@ -1,4 +1,4 @@
-<?
+<?php
 interface cachemanager
 {
 	public function setup($cacheinfo);

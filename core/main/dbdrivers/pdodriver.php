@@ -1,4 +1,4 @@
-<?
+<?php
 class pdodriver extends abstractdbdriver
 {
 	private $pdo;

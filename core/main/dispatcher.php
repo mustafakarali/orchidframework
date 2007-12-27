@@ -1,4 +1,4 @@
-<?
+<?php
 class dispatcher
 {
 	public static function dispatch($router)

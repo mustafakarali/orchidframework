@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Javascript Manager
  *

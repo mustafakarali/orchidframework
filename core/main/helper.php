@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * for general file inclusion
  *

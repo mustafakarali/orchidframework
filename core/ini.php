@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * this initializer class initializes orchid for successful file inclusion 
  * and autoloading objects.

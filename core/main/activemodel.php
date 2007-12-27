@@ -1,4 +1,4 @@
-<?
+<?php
 class activemodel
 {
 	public $hasmany = "";

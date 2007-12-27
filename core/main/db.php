@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("dbdrivers/abstract.dbdriver.php");
 class db
 {

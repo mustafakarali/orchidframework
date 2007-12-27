@@ -1,4 +1,4 @@
-<?
+<?php
 class lang
 {
 	private $lang;

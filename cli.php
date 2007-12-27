@@ -1,4 +1,4 @@
-<?
+<?php
 echo "Welcome to Command Line Tool of Orchid \n";
 
 switch ($argv[1] ){

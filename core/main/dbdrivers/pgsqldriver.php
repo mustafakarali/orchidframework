@@ -1,4 +1,4 @@
-<?
+<?php
 class pgsqldriver extends abstractdbdriver 
 {
 

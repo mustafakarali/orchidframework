@@ -1,4 +1,4 @@
-<?
+<?php
 class benchmark
 {
 	private $times = array();

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * sanitize user inputs from malicious attacks
  *

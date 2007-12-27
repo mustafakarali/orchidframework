@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("cache/interface/interface.cache.php");
 class cache 
 {

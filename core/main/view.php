@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * this initializer class initializes orchid for successful file inclusion.
  * it also converts every error to exception
