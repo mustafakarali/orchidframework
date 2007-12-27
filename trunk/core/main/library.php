@@ -1,4 +1,4 @@
-<?
+<?php
 class library{
 	private $loaded = array();
 	private function __get($lib)

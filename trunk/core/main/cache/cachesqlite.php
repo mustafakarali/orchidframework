@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("interface/interface.cache.php");
 class cachesqlite implements cachemanager
 {

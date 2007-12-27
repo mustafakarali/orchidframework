@@ -1,4 +1,4 @@
-<?
+<?php
 class unittest
 {
 	private static $results = array();

@@ -1,4 +1,4 @@
-<?
+<?php
 class model{
 	private $loaded = array();
 	private $nullmodel= false;

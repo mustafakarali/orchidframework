@@ -1,4 +1,4 @@
-<?
+<?php
 class mysqlidriver extends abstractdbdriver
 {
 

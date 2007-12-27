@@ -1,4 +1,4 @@
-<?
+<?php
 class base{
 	public static function pr($array)
 	{

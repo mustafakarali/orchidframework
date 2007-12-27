@@ -1,4 +1,4 @@
-<?
+<?php
 class router
 {
 	private $route;

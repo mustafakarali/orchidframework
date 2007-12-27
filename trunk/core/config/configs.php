@@ -1,4 +1,4 @@
-<?
+<?php
 $configs['debug']="on";
 
 
