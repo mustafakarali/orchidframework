@@ -96,5 +96,10 @@ class welcome extends controller
 		$this->library->jsm->addThickBox();
 		echo '<a href="http://jquery.com/demo/thickbox/ajax.PHP?keepThis=true&TB_iframe=true&height=250&width=400" title="add a caption to title attribute / or leave blank" class="thickbox">Example 1</a> ';
 	}
+	
+	function bp()
+	{
+		//echo "Hello";
+	}
 }
 ?>
