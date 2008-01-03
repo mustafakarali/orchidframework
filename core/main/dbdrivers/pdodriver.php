@@ -155,7 +155,7 @@ class pdodriver extends abstractdbdriver
 	function __destruct(){
 		foreach ($this->results as $result)
 		{
-			@mysql_free_result($result);
+			@pdo_free_result($result);
 		}
 	}
 	

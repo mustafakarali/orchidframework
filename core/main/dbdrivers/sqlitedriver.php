@@ -30,7 +30,7 @@ class sqlitedriver extends abstractdbdriver
 
 	public function execute($sql)
 	{
-		
+
 		$sql = $this->prepQuery($sql);
 		$parts = split(" ",trim($sql));
 		$type = strtolower($parts[0]);
@@ -96,7 +96,7 @@ class sqlitedriver extends abstractdbdriver
 	{
 		$this->execute('ROLLBACK');
 	}
-	
+
 	public function getRow($fetchmode = FETCH_ASSOC)
 	{
 		$lastresult = $this->results[$this->lasthash];
@@ -110,7 +110,7 @@ class sqlitedriver extends abstractdbdriver
 		$row = sqlite_fetch_array($lastresult,SQLITE_BOTH);
 		return $row;
 	}
-	
+
 	public function getRowAt($offset=null,$fetchmode = FETCH_ASSOC)
 	{
 		$lastresult = $this->results[$this->lasthash];
@@ -120,13 +120,13 @@ class sqlitedriver extends abstractdbdriver
 		}
 		return $this->getRow($fetchmode);
 	}
-	
+
 	public function rewind()
 	{
 		$lastresult = $this->results[$this->lasthash];
 		sqlite_rewind($lastresult);
 	}
-	
+
 	public function getRows($start, $count, $fetchmode = FETCH_ASSOC)
 	{
 		$lastresult = $this->results[$this->lasthash];
@@ -138,5 +138,15 @@ class sqlitedriver extends abstractdbdriver
 		}
 		return $rows;
 	}
+
+	function getFields($table)
+	{
+		$_r=sqlite_query("select * from  {$table} limit 0",$this->connection);
+		$fields = array();
+		for($i=0; $i<sqlite_num_fields($_r);$i++)
+		$fields[]= sqlite_field_name($_r,$i);
+		return $fields;
+	}
+
 }
 ?>

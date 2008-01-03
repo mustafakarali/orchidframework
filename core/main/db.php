@@ -53,6 +53,7 @@ class db
 	{
 		return self::$latestquery;
 	}
+	
 
 	/*private function __get($property)
 	{

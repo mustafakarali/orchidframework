@@ -191,5 +191,17 @@ class pgsqldriver extends abstractdbdriver
 	}
 	
 	
+	function getFields($table)
+	{
+		$this->execute("SELECT column_name FROM information_schema.columns WHERE table_name = {$table}");
+		$fields = array();
+		while ($row = $this->getRow())
+		{
+			$fields[] = $row['column_name'];
+		}
+		return $fields;
+	}
+	
+	
 }
 ?>
