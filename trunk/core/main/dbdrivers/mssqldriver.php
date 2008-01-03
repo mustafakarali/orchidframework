@@ -171,6 +171,15 @@ class mssqldriver extends abstractdbdriver
 		return $ver_info[1]; // return the major version b/c that's all we're interested in.
 	}
 	
-	
+	function getFields($table)
+	{
+		$this->execute("SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME = M {$table}");
+		$fields = array();
+		while ($row = $this->getRow())
+		{
+			$fields[] = $row['COLUMN_NAME'];
+		}
+		return $fields;
+	}
 }
 ?>

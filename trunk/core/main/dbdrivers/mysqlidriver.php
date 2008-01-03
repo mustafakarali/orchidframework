@@ -166,6 +166,17 @@ class mysqlidriver extends abstractdbdriver
 			@mysqli_free_result($result);
 		}
 	}
+	
+	function getFields($table)
+	{
+		$this->execute("SHOW COLUMNS FROM {$table}");
+		$fields = array();
+		while ($row = $this->getRow())
+		{
+			$fields[] = $row['Field'];
+		}
+		return $fields;
+	}
 
 
 }
