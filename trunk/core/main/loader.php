@@ -1,4 +1,12 @@
 <?php
+/**
+ * This class makes successful loading of any object through out orchid framework
+ * in a very resource intensive way. 
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class loader
 {
 	private static $loaded = array();

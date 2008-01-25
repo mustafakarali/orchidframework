@@ -1,4 +1,11 @@
 <?php
+/**
+ * The core unittest manager for orchid which helps to write inline unit tests
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class unittest
 {
 	private static $results = array();

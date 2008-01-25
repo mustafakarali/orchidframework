@@ -1,4 +1,11 @@
 <?php
+/**
+ * Router manages all the request and help dispatcher to dispatch them properly
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class router
 {
 	private $route;

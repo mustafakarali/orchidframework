@@ -1,4 +1,12 @@
 <?php
+/**
+ * The cache manager for orchid. It works seamlessly with memcache, sqlite and
+ * mysql as cache storage
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 include_once("cache/interface/interface.cache.php");
 class cache 
 {

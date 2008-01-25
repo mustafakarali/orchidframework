@@ -1,7 +1,7 @@
 <?php
 /**
- * this initializer class initializes orchid for successful file inclusion.
- * it also converts every error to exception
+ * View manage loading all template files and success loading of all the variables
+ * set via controller
  * 
  * @author 		Hasin Hayder [http://hasin.wordpress.com]
  * @copyright 	New BSD License

@@ -1,4 +1,11 @@
 <?php
+/**
+ * The core class for managing configuration directives through out the application
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class config
 {
 	private $config;

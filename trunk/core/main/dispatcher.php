@@ -1,4 +1,12 @@
 <?php
+/**
+ * The dispatcher is responsible for loading and all dispatching all the requests
+ * with the help of router, view, model and loader. 
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class dispatcher
 {
 	public static function dispatch($router)

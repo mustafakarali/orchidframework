@@ -1,4 +1,12 @@
 <?php
+/**
+ * CSSM acts as the gateway to loading of bundled style sheets. You have to use cssm for loading blueprint
+ * css framework, particle tree button styles and thickbox
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class cssm
 {
 	public function addScalableButtonCSS()

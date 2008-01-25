@@ -1,4 +1,11 @@
 <?php
+/**
+ * Loads system and application level libraries 
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class library{
 	private $loaded = array();
 	private function __get($lib)
