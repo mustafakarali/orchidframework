@@ -1,5 +1,4 @@
 <?php
-
 /**
 * Phoogle Maps 2.0 | Uses Google Maps API to create customizable maps
 * that can be embedded on your website

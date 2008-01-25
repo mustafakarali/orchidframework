@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * A general library containing some helper methods
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 /**
 	 * @author : Jason Sheets <jsheets at shadonet dot com>
 	 *
@@ -40,6 +46,20 @@ function SimpleXMLToArray($xml)
 	}
 }
 
+/**
+ * Makes a nice HTML table from a supplied array. 
+ *
+ * @param array 	$Array Array of data
+ * @param int 		$NumberOfColumn How many columns you want
+ * @param int 		$Width Width of the table
+ * @param string 	$Style style of the table
+ * @param int 		$CellSpacing cell spacing
+ * @param int 		$CellPadding cell padding
+ * @param string	$align alignment of the table
+ * @param string	$tdstyle TD style
+ * @param array		$urls URLs if you want to make your cell data clickable
+ * @return string	A nicely formatted HTML Table
+ */
 function arrayToTable($Array, $NumberOfColumn=3, $Width=100, $Style=null, $CellSpacing=0 , $CellPadding=0, $align="left", $tdstyle = "",$urls=null)
 {
 	$data = "<table align='{$align}' width='{$Width}%' cellspacing={$CellSpacing} cellpadding={$CellPadding} style='{$Style}'>";

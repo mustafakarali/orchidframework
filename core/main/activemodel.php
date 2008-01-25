@@ -1,4 +1,11 @@
 <?php
+/**
+ * The active record library for orchid framework.
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class activemodel
 {
 	public $hasmany = "";

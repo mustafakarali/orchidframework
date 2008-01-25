@@ -1,4 +1,11 @@
 <?php
+/**
+ * This class helps to use language files.
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class lang
 {
 	private $lang;

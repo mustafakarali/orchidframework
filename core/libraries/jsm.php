@@ -1,7 +1,11 @@
 <?php
 /**
- * Javascript Manager
- *
+ * Javascript loader which helps developr to load javascripts easily through out the application
+ * It supports gzip compression.
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
  */
 class jsm
 {

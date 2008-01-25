@@ -2,7 +2,8 @@
 /**
  * @author http://www.malaiac.com/GphpChart/
  * 
- * added in orchid by Hasin Hayder
+ * This class helps easy integration of google chart 
+ * Modified for orchid by Hasin Hayder
  *
  */
 class GChart

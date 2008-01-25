@@ -1,4 +1,11 @@
 <?php
+/**
+ * base provides some core functions and act as a global helper through out the application
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class base{
 	public static function pr($array)
 	{

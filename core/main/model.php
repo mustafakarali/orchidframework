@@ -1,4 +1,12 @@
 <?php
+/**
+ * This class acts as a loader of model objects. It also support use of null models in case
+ * there is not physical file for that specific model. 
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class model{
 	private $loaded = array();
 	private $nullmodel= false;

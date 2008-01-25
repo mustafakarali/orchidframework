@@ -1,7 +1,10 @@
 <?php
 /**
- * for general file inclusion
- *
+ * Helper helps to perform a general inclusion of any file from helpers directory. 
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
  */
 class helper{
 	private $loaded = array();
@@ -12,7 +15,6 @@ class helper{
 		if (file_exists($helpernameapp))
 		{
 			require_once($helpernameapp);
-			//$this->loaded[$helper]=new $helper();
 		}
 		else
 		{

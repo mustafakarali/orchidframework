@@ -1,4 +1,12 @@
 <?php
+/**
+ * This class is the gateway of all db operation. This class makes use of all the dbengines
+ * available un dbdrivers directory
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 include_once("dbdrivers/abstract.dbdriver.php");
 class db
 {

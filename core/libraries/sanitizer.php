@@ -1,6 +1,7 @@
 <?php
 /**
  * sanitize user inputs from malicious attacks
+ * @todo : need improvement
  *
  */
 class sanitizer

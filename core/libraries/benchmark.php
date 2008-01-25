@@ -1,4 +1,11 @@
 <?php
+/**
+ * This class helps profiling controller actions
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
 class benchmark
 {
 	private $times = array();

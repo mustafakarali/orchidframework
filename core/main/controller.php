@@ -1,5 +1,13 @@
 <?php
-class controller
+/**
+ * Abstract controller class whish is responsible for managing default behaviour of 
+ * controller objects
+ * 
+ * @author 		Hasin Hayder [http://hasin.wordpress.com]
+ * @copyright 	New BSD License
+ * @version 	0.1	
+ */
+Abstract class controller
 {
 	private $params;
 	public $redirectcontroller;
