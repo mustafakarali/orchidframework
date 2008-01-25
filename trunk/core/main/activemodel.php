@@ -8,10 +8,8 @@ class activemodel
 	public function clean()
 	{
 		$properties = get_class_vars(get_class($this));
-		//die(print_r($properties));
 		foreach ($properties as $prop=>$val)
 		{
-			//echo $prop;
 			unset($this->$prop);
 		}
 	}
@@ -20,18 +18,17 @@ class activemodel
 	{
 		$tablename = $this->tableName();
 		$db = loader::load("db");
-		$db->execute("show fields from {$tablename}");
+		//$db->execute("show fields from {$tablename}");
 		//echo $db->count();
+		$dbfields = $db->getFields($tablename);
 		$fields=$values=array();
-		while($row = $db->getRow())
+		foreach($dbfields as $fieldname)
 		{
-			$fieldname = $row['Field'];
 			$fields[]= $fieldname;
 			$values[] = !isset($this->{$fieldname})?'null':"'{$this->$fieldname}'";
 		}
 		$query = "INSERT INTO {$tablename}(".join(",",$fields).") VALUES(".join(",",$values).")";
 		$result = $db->execute($query);
-		//die($tablename);
 	}
 
 	public function update($condition=null,$primary="id")
