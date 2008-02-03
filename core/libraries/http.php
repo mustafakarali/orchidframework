@@ -4,7 +4,7 @@
  *
  * This is a wrapper HTTP class that uses either cURL or fsockopen to 
  * harvest resources from web. This can be used with scripts that need 
- * a way to communicate with various APIs who support REST.
+ * a way to communicate with publicious APIs who support REST.
  *
  * @author      Md Emran Hasan <phpfour@gmail.com>
  * @package     Library
@@ -18,199 +18,199 @@ class Http
     /**
      * Contains the target URL
      *
-     * @var string
+     * @public string
      */
-    var $target;
+    public $target;
     
     /**
      * Contains the target host
      *
-     * @var string
+     * @public string
      */
-    var $host;
+    public $host;
     
     /**
      * Contains the target port
      *
-     * @var integer
+     * @public integer
      */
-    var $port;
+    public $port;
     
     /**
      * Contains the target path
      *
-     * @var string
+     * @public string
      */
-    var $path;
+    public $path;
     
     /**
      * Contains the target schema
      *
-     * @var string
+     * @public string
      */
-    var $schema;
+    public $schema;
     
     /**
      * Contains the http method (GET or POST)
      *
-     * @var string
+     * @public string
      */
-    var $method;
+    public $method;
     
     /**
      * Contains the parameters for request
      *
-     * @var array
+     * @public array
      */
-    var $params;
+    public $params;
     
     /**
      * Contains the cookies for request
      *
-     * @var array
+     * @public array
      */
-    var $cookies;
+    public $cookies;
     
     /**
      * Contains the cookies retrieved from response
      *
-     * @var array
+     * @public array
      */
-    var $_cookies;
+    public $_cookies;
     
     /**
      * Number of seconds to timeout
      *
-     * @var integer
+     * @public integer
      */
-    var $timeout;
+    public $timeout;
     
     /**
      * Whether to use cURL or not
      *
-     * @var boolean
+     * @public boolean
      */
-    var $useCurl;
+    public $useCurl;
     
     /**
      * Contains the referrer URL
      *
-     * @var string
+     * @public string
      */
-    var $referrer;
+    public $referrer;
     
     /**
      * Contains the User agent string
      *
-     * @var string
+     * @public string
      */
-    var $userAgent;
+    public $userAgent;
     
     /**
      * Contains the cookie path (to be used with cURL)
      *
-     * @var string
+     * @public string
      */
-    var $cookiePath;
+    public $cookiePath;
     
     /**
      * Whether to use cookie at all
      *
-     * @var boolean
+     * @public boolean
      */
-    var $useCookie;
+    public $useCookie;
     
     /**
      * Whether to store cookie for subsequent requests
      *
-     * @var boolean
+     * @public boolean
      */
-    var $saveCookie;
+    public $saveCookie;
     
     /**
      * Contains the Username (for authentication)
      *
-     * @var string
+     * @public string
      */
-    var $username;
+    public $username;
     
     /**
      * Contains the Password (for authentication)
      *
-     * @var string
+     * @public string
      */
-    var $password;
+    public $password;
     
     /**
      * Contains the fetched web source
      *
-     * @var string
+     * @public string
      */
-    var $result;
+    public $result;
     
     /**
      * Contains the last headers 
      *
-     * @var string
+     * @public string
      */
-    var $headers;
+    public $headers;
     
     /**
      * Contains the last call's http status code
      *
-     * @var string
+     * @public string
      */
-    var $status;
+    public $status;
     
     /**
      * Whether to follow http redirect or not
      *
-     * @var boolean
+     * @public boolean
      */
-    var $redirect;
+    public $redirect;
     
     /**
      * The maximum number of redirect to follow
      *
-     * @var integer
+     * @public integer
      */
-    var $maxRedirect;
+    public $maxRedirect;
     
     /**
      * The current number of redirects
      *
-     * @var integer
+     * @public integer
      */
-    var $curRedirect;
+    public $curRedirect;
     
     /**
      * Contains any error occurred
      *
-     * @var string
+     * @public string
      */
-    var $error;
+    public $error;
     
     /**
      * Store the next token
      *
-     * @var string
+     * @public string
      */
-    var $nextToken;
+    public $nextToken;
     
     /**
      * Whether to keep debug messages
      *
-     * @var boolean
+     * @public boolean
      */
-    var $debug;
+    public $debug;
     
     /**
      * Stores the debug messages
      *
-     * @var array
+     * @public array
      * @todo will keep debug messages
      */
-    var $debugMsg;
+    public $debugMsg;
     
     /**
      * Constructor for initializing the class with default values.
@@ -226,7 +226,7 @@ class Http
      * Initialize preferences
      * 
      * This function will take an associative array of config values and 
-     * will initialize the class variables using them. 
+     * will initialize the class publiciables using them. 
      * 
      * Example use:
      * 
@@ -236,7 +236,7 @@ class Http
      * $httpConfig['referrer']   = 'http://www.somedomain.com';
      * $httpConfig['user_agent'] = 'My Crawler';
      * $httpConfig['timeout']    = '30';
-     * $httpConfig['params']     = array('var1' => 'testvalue', 'var2' => 'somevalue');
+     * $httpConfig['params']     = array('public1' => 'testvalue', 'public2' => 'somevalue');
      * 
      * $http = new Http();
      * $http->initialize($httpConfig);
@@ -309,89 +309,7 @@ class Http
         $this->userAgent    = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.9';
     }
     
-    /**
-     * Set target URL
-     *
-     * @param string URL of target resource
-     * @return void
-     */
-    function setTarget($url)
-    {
-        if ($url)
-        {
-            $this->target = $url;
-        }   
-    }
     
-    /**
-     * Set http method
-     *
-     * @param string HTTP method to use (GET or POST)
-     * @return void
-     */
-    function setMethod($method)
-    {
-        if ($method == 'GET' || $method == 'POST')
-        {
-            $this->method = $method;
-        }   
-    }
-    
-    /**
-     * Set referrer URL
-     *
-     * @param string URL of referrer page
-     * @return void
-     */
-    function setReferrer($referrer)
-    {
-        if ($referrer)
-        {
-            $this->referrer = $referrer;
-        }   
-    }
-    
-    /**
-     * Set User agent string
-     *
-     * @param string Full user agent string
-     * @return void
-     */
-    function setUseragent($agent)
-    {
-        if ($agent)
-        {
-            $this->userAgent = $agent;
-        }   
-    }
-    
-    /**
-     * Set timeout of execution
-     *
-     * @param integer Timeout delay in seconds
-     * @return void
-     */
-    function setTimeout($seconds)
-    {
-        if ($seconds > 0)
-        {
-            $this->timeout = $seconds;
-        }   
-    }
-    
-    /**
-     * Set cookie path (cURL only)
-     *
-     * @param string File location of cookiejar
-     * @return void
-     */
-    function setCookiepath($path)
-    {
-        if ($path)
-        {
-            $this->cookiePath = $path;
-        }   
-    }
     
     /**
      * Set request parameters
@@ -403,7 +321,7 @@ class Http
     {
         if (is_array($dataArray))
         {
-            $this->params = array_merge($this->params, $dataArray);
+            $this->params =  $dataArray;
         }   
     }
     
@@ -423,19 +341,6 @@ class Http
         }
     }
     
-    /**
-     * Set maximum number of redirection to follow
-     *
-     * @param integer Maximum number of redirects
-     * @return void
-     */
-    function setMaxredirect($value)
-    {
-        if (!empty($value))
-        {
-            $this->maxRedirect = $value;
-        }
-    }
     
     /**
      * Add request parameters
@@ -467,47 +372,7 @@ class Http
         }   
     }
     
-    /**
-     * Whether to use cURL or not
-     *
-     * @param boolean Whether to use cURL or not
-     * @return void
-     */
-    function useCurl($value = TRUE)
-    {
-        if (is_bool($value))
-        {
-            $this->useCurl = $value;
-        }   
-    }
     
-    /**
-     * Whether to use cookies or not
-     *
-     * @param boolean Whether to use cookies or not
-     * @return void
-     */
-    function useCookie($value = TRUE)
-    {
-        if (is_bool($value))
-        {
-            $this->useCookie = $value;
-        }   
-    }
-    
-    /**
-     * Whether to save persistent cookies in subsequent calls
-     *
-     * @param boolean Whether to save persistent cookies or not
-     * @return void
-     */
-    function saveCookie($value = TRUE)
-    {
-        if (is_bool($value))
-        {
-            $this->saveCookie = $value;
-        }   
-    }
     
     /**
      * Whether to follow HTTP redirects
@@ -1129,7 +994,7 @@ class Http
     /**
      * Tokenize String (internal)
      * 
-     * Tokenize string for various internal usage. Omit the second parameter 
+     * Tokenize string for publicious internal usage. Omit the second parameter 
      * to tokenize the previous string that was provided in the prior call to 
      * the function.
      *
