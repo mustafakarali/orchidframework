@@ -24,7 +24,10 @@ class loader
 		"session",
 		"ajax",
 		"json",
-		"lang");
+		"lang",
+		"image",
+		"jsm",
+		"cssm");
 
 		if (!in_array($object,$valid))
 		{

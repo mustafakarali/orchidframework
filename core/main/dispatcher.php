@@ -14,6 +14,10 @@ class dispatcher
 		global $app;
 		ob_start();
 		$config = loader::load("config");
+		
+		$char_encoding = $config->char_encoding;
+		if (empty($char_encoding)) $char_encoding="iso-8859-1";
+		header("Content-Type: text/html; charset={$char_encoding}");
 
 		if ($config->global_profile) $start = microtime(true);
 
