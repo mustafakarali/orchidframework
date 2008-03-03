@@ -55,7 +55,11 @@ class jsm
 	{
 		$base = base::baseUrl();
 		$script = $base."/app/js/{$filename}.js";
+		if ($this->gzipenabled)
 		echo "<script type='text/javascript' src='{$base}/app/js/gzip.php?js={$script}' ></script>\n";
+		else 
+		echo "<script type='text/javascript' src='{$script}' ></script>\n";
+
 	}
 
 	function loadButtonJS()
