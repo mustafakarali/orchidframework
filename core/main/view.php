@@ -19,6 +19,13 @@ class view
 	}
 	public function set($key, $value)
 	{
+		$args = func_get_args();
+		if (1==count($args) && is_array($args[0]))
+		{
+			foreach ($args[0] as $key=>$value)
+			$this->vars[$key]=$value;
+		}
+		elseif (!empty($key) & !empty($value))
 		$this->vars[$key]=$value;
 		//base::pr($this->vars);
 	}

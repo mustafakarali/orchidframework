@@ -6,22 +6,27 @@ class image
 	 * for easyly embedding images in app
 	 */
 	
-	function displayImage($filename="",$width=null, $height=null)
+	function displayImage($filename="",$width=null, $height=null,$url="", $target="")
 	{
 		$imagepath = base::baseUrl()."/app/images/{$filename}";
-		$tag = "<img src='{$imagepath}' />";
-		$tag2 = "<img src='{$imagepath}' width='{$width}px' />";
-		$tag3 = "<img src='{$imagepath}' height='{$height}px'/>";
-		$tag4 = "<img src='{$imagepath}' height='{$height}px' width='{$width}px'/>";
+		$tag = "<img border=0 src='{$imagepath}' />";
+		$tag2 = "<img  border=0 src='{$imagepath}' width='{$width}px' />";
+		$tag3 = "<img  border=0 src='{$imagepath}' height='{$height}px'/>";
+		$tag4 = "<img  border=0 src='{$imagepath}' height='{$height}px' width='{$width}px'/>";
+		
+		if (!empty($url)){
+		$prefix = "<a href='{$url}' target='{$target}' >";
+		$suffix = "</a>";
+		}
 		
 		if (empty($height) && empty($width))
-		echo $tag;
+		echo $prefix.$tag.$suffix;
 		elseif (!empty($width) && !empty($height))
-		echo $tag4;
+		echo $prefix.$tag4.$suffix;
 		elseif (!empty($width))
-		echo $tag2;
+		echo $prefix.$tag2.$suffix;
 		elseif(!empty($height))
-		echo $tag3;
+		echo $prefix.$tag3.$suffix;
 	}
 	
 	function getUrl($filename="")
