@@ -75,6 +75,7 @@ class router
 			foreach ($_POST as $key=>$val)
 			$this->params[$key]=$val;
 		}
+		$post->paramcounts=count($_POST);
 		return $this->params;
 	}
 	
@@ -86,6 +87,7 @@ class router
 			foreach ($_POST as $key=>$val)
 			$post->$key = $val;
 		}
+		$post->paramcounts=count($_POST);
 		return $post;
 	}
 

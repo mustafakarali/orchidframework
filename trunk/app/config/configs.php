@@ -1,6 +1,6 @@
 <?
 $configs['use_layout']=true;
-$configs['unit_test_enabled']=true;
+$configs['unit_test_enabled']=false;
 $configs['default_controller']="welcome";
 $configs['global_profile']=false;
 

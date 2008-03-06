@@ -24,6 +24,7 @@ class dispatcher
 		$controller = $router->getController();
 		$action = $router->getAction();
 		$params = $router->getParams();
+		
 
 		if (count($params)>=1){
 			if ("unittest"==$params[count($params)-1] || '1'==$_POST['unittest'])
