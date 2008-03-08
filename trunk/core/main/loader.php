@@ -27,7 +27,8 @@ class loader
 		"lang",
 		"image",
 		"jsm",
-		"cssm");
+		"cssm",
+		"helper");
 
 		if (!in_array($object,$valid))
 		{
