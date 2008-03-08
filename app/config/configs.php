@@ -24,4 +24,6 @@ $configs['google_map_api']="ABQIAAAAK49OOamo8inlPm0oVAsu5hT2yXp_ZAY8_ufC3CFXhHIE
 $configs['base_url']="http://122.248.7.196/hasin/orchidframework";
 $configs['char_encoding'] = "utf-8";
 $configs['js_gzip_enabled'] = false;
+
+$configs['session_auto_start'] = true;
 ?>

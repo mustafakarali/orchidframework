@@ -14,6 +14,11 @@ class dispatcher
 		global $app;
 		ob_start();
 		$config = loader::load("config");
+		if ($config->session_auto_start)
+		{
+			$session = loader::load("session");
+			$session->start;
+		}
 
 		$char_encoding = $config->char_encoding;
 		if (empty($char_encoding)) $char_encoding="iso-8859-1";
