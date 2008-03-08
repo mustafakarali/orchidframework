@@ -24,6 +24,7 @@ class activemodel
 	public function insert()
 	{
 		$tablename = $this->tableName();
+		$this->created=time();
 		$db = loader::load("db");
 		//$db->execute("show fields from {$tablename}");
 		//echo $db->count();
@@ -42,6 +43,7 @@ class activemodel
 	{
 		//print_r($this);
 		$tablename = $this->tableName();
+		$this->modified=time();
 		$db = loader::load("db");
 		//$db->execute("show fields from {$tablename}");
 		//echo $db->count();
