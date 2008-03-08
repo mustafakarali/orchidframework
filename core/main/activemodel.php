@@ -213,9 +213,10 @@ class activemodel
 		$stmt = "SELECT {$fields} FROM {$this->tablename}";
 		if (!empty($where)) $where = "WHERE {$where}";
 		if (!empty($orderby)) $orderby = "ORDER BY {$orderby}";
+		if ($limit!=0) $limit = "LIMIT {$limit}"; 
 		foreach ($tablesAndClauses as $table=>$clause)
 		{
-			$stmt.= " {$clause['type']} $table ON {$clause['condition']} {$where} {$orderby}";
+			$stmt.= " {$clause['type']} $table ON {$clause['condition']} {$where} {$orderby} {$limit}";
 			
 		}
 		
@@ -224,6 +225,8 @@ class activemodel
 		//echo $query;
 		if ($limit==0)
 		$limit = $db->count();
+		//else 
+		//$limit=$db->count()>$limit?$limit:$db->count();
 		if ($limit==0)
 		return array();
 
