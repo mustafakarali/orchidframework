@@ -39,12 +39,26 @@ class dispatcher
 		$redirect=true;
 		while($redirect){
 			$controllerfile = "app/controllers/{$controller}.php";
-
 			if (!file_exists($controllerfile)){
+				//check for catch_all_controller
+				$catchAllController = $config->catch_all_controller;				
+				if (empty($catchAllController))
 				throw new Exception("Controller not found");
+				else 
+				{
+					//here the fun begins
+					$controller = $catchAllController;
+					$controllerfile = "app/controllers/{$controller}.php";
+				}
 			}
 			require_once($controllerfile);
 			$app = new $controller();
+			if ($catchAllController)
+			{
+				$app->catchAllController = $catchAllController;
+				$app->catchAllAction=$action;
+				$action="catchAll";
+			}
 			$app->setParams($params);
 			$app->setPostParams($router->getPostParams());
 			$app->$action();

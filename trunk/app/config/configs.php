@@ -26,4 +26,6 @@ $configs['char_encoding'] = "utf-8";
 $configs['js_gzip_enabled'] = false;
 
 $configs['session_auto_start'] = true;
+
+$configs['catch_all_controller'] = "gopsop";
 ?>
