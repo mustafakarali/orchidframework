@@ -2,7 +2,7 @@
 $configs['use_layout']=true;
 $configs['unit_test_enabled']=false;
 $configs['default_controller']="welcome";
-$configs['global_profile']=false;
+$configs['global_profile']=true;
 
 /* DB */
 $configs['db']['usedb']="mysql";
