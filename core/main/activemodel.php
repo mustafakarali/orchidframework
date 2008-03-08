@@ -215,7 +215,7 @@ class activemodel
 		if (!empty($orderby)) $orderby = "ORDER BY {$orderby}";
 		foreach ($tablesAndClauses as $table=>$clause)
 		{
-			$stmt.= " {$clause['type']} $table ON {$clause['condition']} {$where} ";
+			$stmt.= " {$clause['type']} $table ON {$clause['condition']} {$where} {$orderby}";
 			
 		}
 		
