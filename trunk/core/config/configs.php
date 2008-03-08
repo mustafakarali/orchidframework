@@ -59,4 +59,6 @@ $configs['session_table']=null;
 
 $configs['js_gzip_enabled']=false;
 $configs['char_encoding'] = "utf-8";
+
+$configs['session_auto_start'] = false;
 ?>
