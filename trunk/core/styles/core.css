@@ -2,16 +2,16 @@
 {
 	border: 2px solid #990000;
 	padding:10px;
-	background-color:#CCCC66;
+	background-color:#F1F1D4;
 }
 
 .error h2
 {
-	font-size:14px;
+	font-size:18px;
 	padding-bottom:5px;
 	margin-bottom:5px;
 	border-bottom:2px solid #990000;
-	padding-left:0px;
+	color:#990000;
 }
 
 .error ul li
