@@ -71,6 +71,11 @@ Abstract class controller
 		return $this->errors;
 	}
 	
+	function setViewParam($key,$value)
+	{
+		$this->view->set($key,$value);
+	}
+	
 	function base(){}
 }
 ?>
