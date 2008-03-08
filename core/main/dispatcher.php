@@ -59,6 +59,10 @@ class dispatcher
 				$app->catchAllAction=$action;
 				$action="catchAll";
 			}
+			
+			$helper = loader::load("helper");
+			$cm = $helper->common; //load the common helper from app directory
+			
 			$app->setParams($params);
 			$app->setPostParams($router->getPostParams());
 			$app->$action();
