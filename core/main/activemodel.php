@@ -206,6 +206,47 @@ class activemodel
 	{
 		$this->tablename = $tablename;
 	}
+	
+	public function join($fields,$tablesAndClauses, $where=null, $orderby=null,$limit=0)
+	{
+		$db = loader::load("db");
+		$stmt = "SELECT {$fields} FROM {$this->tablename}";
+		if (!empty($where)) $where = "WHERE {$where}";
+		if (!empty($orderby)) $orderby = "ORDER BY {$orderby}";
+		foreach ($tablesAndClauses as $table=>$clause)
+		{
+			$stmt.= " {$clause['type']} $table ON {$clause['condition']} {$where} ";
+			
+		}
+		
+		$results=array();
+		$db->execute($stmt);
+		//echo $query;
+		if ($limit==0)
+		$limit = $db->count();
+		if ($limit==0)
+		return array();
+
+		for($i=0;$i<$limit; $i++)
+		{
+			$data = $db->getRow();
+			if (!empty($data))
+			$results[] = $data;
+		}
+		
+		if (count($results)==1){
+			foreach($results[0] as $key=>$value)
+			{
+				$this->$key = $value;
+			}
+			$results = $results[0]; //for accessing like getName(), getField()
+		}
+
+		//base::pr($results);
+		//die();
+		$this->results = $results;
+		return $results;
+	}
 
 
 }
