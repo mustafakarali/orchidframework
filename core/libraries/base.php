@@ -72,5 +72,11 @@ class base{
 		if (strpos($agent,"MSIE 7.0")!==false) return true;
 		return false;
 	}
+	
+	function loadConfig()
+	{
+		$config = loader::load($config);
+		return $config;
+	}
 }
 ?>

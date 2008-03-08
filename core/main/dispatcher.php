@@ -14,7 +14,7 @@ class dispatcher
 		global $app;
 		ob_start();
 		$config = loader::load("config");
-		
+
 		$char_encoding = $config->char_encoding;
 		if (empty($char_encoding)) $char_encoding="iso-8859-1";
 		header("Content-Type: text/html; charset={$char_encoding}");
@@ -24,7 +24,7 @@ class dispatcher
 		$controller = $router->getController();
 		$action = $router->getAction();
 		$params = $router->getParams();
-		
+
 
 		if (count($params)>=1){
 			if ("unittest"==$params[count($params)-1] || '1'==$_POST['unittest'])
@@ -66,6 +66,7 @@ class dispatcher
 		ob_start();
 
 		$view = loader::load("view");
+		$view->set("_errors",$app->getError());
 		$viewvars = $view->getVars($app);
 		$uselayout = $config->use_layout;
 
@@ -76,8 +77,10 @@ class dispatcher
 		$template = $view->getTemplate($action);
 
 
-		if ($app->use_view==true)
-		base::_loadTemplate($controller, $template, $viewvars, $uselayout);
+		if ($app->use_view==true){
+			base::_loadTemplate($controller, $template, $viewvars, $uselayout);
+			$app->cssm->addCoreCSS();
+		}
 		else
 		echo $rawoutput;
 

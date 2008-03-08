@@ -34,6 +34,12 @@ class cssm
 		$basepath = base::baseUrl();
 		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/thickbox.css\"; </style>";
 	}
+	
+	public function addCoreCSS()
+	{
+		$basepath = base::baseUrl();
+		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/core.css\"; </style>";
+	}
 
 	public function addBluePrint($iehack=false)
 	{

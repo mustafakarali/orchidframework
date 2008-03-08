@@ -16,6 +16,14 @@ Abstract class controller
 	public $use_layout=true;
 	public $post;
 	public $template;
+	private $errors;
+	public $error=false;
+	
+	function __construct()
+	{
+		$this->errors = array();
+	}
+	
 	private function __get($var)
 	{
 		if ($var == "params")
@@ -32,6 +40,7 @@ Abstract class controller
 	{
 		$this->post = $post;
 	}
+	
 	public function redirect($controller, $action="base")
 	{
 		$this->redirectcontroller=$controller;
@@ -49,6 +58,17 @@ Abstract class controller
 	public function setView($view)
 	{
 		$this->template = $view;
+	}
+	
+	public function setError($errorMsg)
+	{
+		$this->errors[md5($errorMsg)]= $errorMsg;//to avoid storing multiple errors for many times, used this hash
+		$this->error = true;
+	}
+	
+	public function getError()
+	{
+		return $this->errors;
 	}
 	
 	function base(){}

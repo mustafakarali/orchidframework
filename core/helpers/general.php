@@ -160,4 +160,14 @@ function createPagination($total, $callback, $numberperpage, $currentpage)
 	return $data;
 }
 
+
+function allEmpty()
+{
+	$args = func_get_args();
+	foreach ($args as $item)
+	if (empty($item))
+	return false;
+	
+	return true;
+}
 ?>

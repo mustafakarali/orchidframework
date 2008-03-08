@@ -92,5 +92,24 @@ class view
 		}
 		return $response;
 	}
+	
+	public function displayErrors()
+	{
+		$title = $this->lang->error_title;
+		if (empty($title)) $title="Error";
+		$_errors = $this->vars['_errors'];
+		
+		if (!empty($_errors))
+		{
+			echo "<div id='_internalerror' class='error'>";
+			echo "<h2>{$title}</h2>";
+			echo "<ul>";
+			foreach ($_errors as $key=>$_error)
+			{
+				echo "<li>{$_error}</li>";
+			}
+			echo "</ul></div>";
+		}
+	}
 }
 ?>
