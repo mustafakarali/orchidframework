@@ -47,6 +47,7 @@ class dispatcher
 				else 
 				{
 					//here the fun begins
+					$_controller = $controller;
 					$controller = $catchAllController;
 					$controllerfile = "app/controllers/{$controller}.php";
 				}
@@ -55,7 +56,7 @@ class dispatcher
 			$app = new $controller();
 			if ($catchAllController)
 			{
-				$app->catchAllController = $catchAllController;
+				$app->catchAllController = $_controller;
 				$app->catchAllAction=$action;
 				$action="catchAll";
 			}
