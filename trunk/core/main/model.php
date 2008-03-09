@@ -15,7 +15,8 @@ class model{
 		$_model= $model;
 		$model .="model";
 		$modelfile = "app/models/{$model}.php";
-
+		$this->nullmodel=false;
+		//echo getcwd();
 		if (!file_exists($modelfile)){
 			$this->nullmodel=true;
 			$modelfile = "core/models/nullmodel.php";
@@ -25,11 +26,15 @@ class model{
 
 		if (file_exists($modelfile))
 		{
+			
 			include_once($modelfile);
+			
 			if (empty($this->loaded[$model]))
 			{
-				if (!$this->nullmodel)
+				
+				if (!$this->nullmodel){
 				$this->loaded[$model]=new $model();
+				}
 				else 
 				$this->loaded[$model]=new nullmodel($_model);
 			}

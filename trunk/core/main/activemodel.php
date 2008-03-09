@@ -66,8 +66,9 @@ class activemodel
 		else
 		$query = "UPDATE {$tablename} SET ".join(",",$values)." WHERE {$condition}";
 		
-		//die($query);
+		
 		$result = $db->execute($query);
+		//die($query);
 
 		//die($tablename);
 	}
@@ -96,7 +97,7 @@ class activemodel
 		$query = "SELECT * FROM {$tablename}  {$clause} LIMIT {$limit}";
 		$results=array();
 		$db->execute($query);
-		//echo $query;
+		echo $query;
 		if ($db->count()==0)
 		return array();
 
@@ -204,6 +205,9 @@ class activemodel
 
 	public function __construct($tablename = "")
 	{
+		if (empty($tablename))
+		$this->tablename =$this->tablename();
+		else 
 		$this->tablename = $tablename;
 	}
 	
@@ -213,16 +217,18 @@ class activemodel
 		$stmt = "SELECT {$fields} FROM {$this->tablename}";
 		if (!empty($where)) $where = "WHERE {$where}";
 		if (!empty($orderby)) $orderby = "ORDER BY {$orderby}";
-		if ($limit!=0) $limit = "LIMIT {$limit}"; 
+		if ($limit!=0) $_limit = "LIMIT {$limit}"; 
 		foreach ($tablesAndClauses as $table=>$clause)
 		{
-			$stmt.= " {$clause['type']} $table ON {$clause['condition']} {$where} {$orderby} {$limit}";
+			$stmt.= " {$clause['type']} $table ON {$clause['condition']} ";
 			
 		}
+		$stmt .= " {$where} {$orderby} {$_limit}";
 		
 		$results=array();
+		$_results=array();
 		$db->execute($stmt);
-		//echo $query;
+		//echo "<br/>".$stmt;
 		if ($limit==0)
 		$limit = $db->count();
 		//else 
@@ -234,21 +240,22 @@ class activemodel
 		{
 			$data = $db->getRow();
 			if (!empty($data))
-			$results[] = $data;
+			$_results[] = $data;
 		}
 		
-		if (count($results)==1){
-			foreach($results[0] as $key=>$value)
+		if (count($_results)==1){
+			foreach($_results[0] as $key=>$value)
 			{
 				$this->$key = $value;
 			}
-			$results = $results[0]; //for accessing like getName(), getField()
+			$results = $_results[0]; //for accessing like getName(), getField()
 		}
 
 		//base::pr($results);
 		//die();
+		if (!empty($results))
 		$this->results = $results;
-		return $results;
+		return $_results;
 	}
 
 
