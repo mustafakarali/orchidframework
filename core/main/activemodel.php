@@ -21,6 +21,39 @@ class activemodel
 		}
 	}
 
+	public function delete($condition="",$primary="id")
+	{
+		//print_r($this);
+		$tablename = $this->tableName();
+		$this->modified=time();
+		$db = loader::load("db");
+		//$db->execute("show fields from {$tablename}");
+		//echo $db->count();
+		$dbfields = $db->getFields($tablename);
+		$fields=$values=array();
+		foreach($dbfields as $fieldname)
+		{
+			//$f$fields[]= $fieldname;
+			$values[] = $fieldname." = ".(!isset($this->{$fieldname})?'null':"'{$this->$fieldname}'");
+		}
+		if (empty($condition)){
+			if (!empty($this->$primary)){
+				$query = "DELETE FROM {$tablename} WHERE ".join(" AND ",$values)." AND {$primary}='{$this->$primary}'";
+			}
+			else
+			{
+				throw new Exception("Your model must have value set to primary key field for successful update");
+			}
+		}
+		else
+		$query = "DELETE FROM {$tablename} WHERE {$condition}";
+
+
+		$result = $db->execute($query);
+		//die($query);
+
+		//die($tablename);
+	}
 	public function insert()
 	{
 		$tablename = $this->tableName();
@@ -36,6 +69,7 @@ class activemodel
 			$values[] = !isset($this->{$fieldname})?'null':"'{$this->$fieldname}'";
 		}
 		$query = "INSERT INTO {$tablename}(".join(",",$fields).") VALUES(".join(",",$values).")";
+		//die($query);
 		$result = $db->execute($query);
 	}
 
@@ -65,8 +99,8 @@ class activemodel
 		}
 		else
 		$query = "UPDATE {$tablename} SET ".join(",",$values)." WHERE {$condition}";
-		
-		
+
+
 		$result = $db->execute($query);
 		//die($query);
 
@@ -207,31 +241,31 @@ class activemodel
 	{
 		if (empty($tablename))
 		$this->tablename =$this->tablename();
-		else 
+		else
 		$this->tablename = $tablename;
 	}
-	
+
 	public function join($fields,$tablesAndClauses, $where=null, $orderby=null,$limit=0)
 	{
 		$db = loader::load("db");
 		$stmt = "SELECT {$fields} FROM {$this->tablename}";
 		if (!empty($where)) $where = "WHERE {$where}";
 		if (!empty($orderby)) $orderby = "ORDER BY {$orderby}";
-		if ($limit!=0) $_limit = "LIMIT {$limit}"; 
+		if ($limit!=0) $_limit = "LIMIT {$limit}";
 		foreach ($tablesAndClauses as $table=>$clause)
 		{
 			$stmt.= " {$clause['type']} $table ON {$clause['condition']} ";
-			
+
 		}
 		$stmt .= " {$where} {$orderby} {$_limit}";
-		
+
 		$results=array();
 		$_results=array();
 		$db->execute($stmt);
 		//echo "<br/>".$stmt;
 		if ($limit==0)
 		$limit = $db->count();
-		//else 
+		//else
 		//$limit=$db->count()>$limit?$limit:$db->count();
 		if ($limit==0)
 		return array();
@@ -242,7 +276,7 @@ class activemodel
 			if (!empty($data))
 			$_results[] = $data;
 		}
-		
+
 		if (count($_results)==1){
 			foreach($_results[0] as $key=>$value)
 			{

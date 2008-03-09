@@ -1,7 +1,7 @@
 <?
 $configs['use_layout']=true;
 $configs['unit_test_enabled']=false;
-$configs['default_controller']="welcome";
+$configs['default_controller']="gopsop";
 $configs['global_profile']=true;
 
 /* DB */
