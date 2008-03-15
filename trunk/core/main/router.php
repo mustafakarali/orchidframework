@@ -90,6 +90,11 @@ class router
 		$post->paramcounts=count($_POST);
 		return $post;
 	}
+	
+	public function getRoute()
+	{
+		return $this->route;
+	}
 
 }
 ?>

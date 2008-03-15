@@ -11,6 +11,9 @@ class mysqldriver extends abstractdbdriver
 			else
 			$this->connection = mysql_connect($dbinfo['dbhost'],$dbinfo['dbuser'],$dbinfo['dbpwd']);
 			mysql_select_db($dbinfo['dbname'],$this->connection);
+			
+			//mysql_query('SET CHARACTER SET utf8');
+			//mysql_query("SET SESSION collation_connection ='utf8_general_ci'");
 		}
 		else
 		throw new Exception("You must supply username, password, hostname and database name for connecting to mysql");

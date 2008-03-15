@@ -28,7 +28,8 @@ class loader
 		"image",
 		"jsm",
 		"cssm",
-		"helper");
+		"helper",
+		"bookmark");
 
 		if (!in_array($object,$valid))
 		{
