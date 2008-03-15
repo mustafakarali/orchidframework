@@ -2,7 +2,7 @@
 $configs['use_layout']=true;
 $configs['unit_test_enabled']=false;
 $configs['default_controller']="gopsop";
-$configs['global_profile']=true;
+$configs['global_profile']=false;
 
 /* DB */
 $configs['db']['usedb']="mysql";
@@ -21,7 +21,7 @@ $configs['css_dir']="styles";
 $configs['google_map_api']="ABQIAAAAK49OOamo8inlPm0oVAsu5hT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQIcWTaKgysPazGPZPIbdbDZ5Jf1w";
 
 
-$configs['base_url']="http://localhost/learn/gopsop/orchidframework";
+$configs['base_url']="http://122.246.7.196/hasin/gopsop/orchidframework";
 $configs['char_encoding'] = "utf-8";
 $configs['js_gzip_enabled'] = false;
 

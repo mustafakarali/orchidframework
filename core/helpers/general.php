@@ -263,4 +263,11 @@ function datediff($interval, $datefrom, $dateto, $using_timestamps = false) {
 	return $datediff;
 
 }
+
+function getCurrentURL()
+{
+	$router = loader::load("router");
+	$url = base::baseUrl()."/".$router->getRoute();
+	return $url;
+}
 ?>

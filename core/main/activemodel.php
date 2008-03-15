@@ -131,7 +131,7 @@ class activemodel
 		$query = "SELECT * FROM {$tablename}  {$clause} LIMIT {$limit}";
 		$results=array();
 		$db->execute($query);
-		echo $query;
+		//echo $query;
 		if ($db->count()==0)
 		return array();
 
