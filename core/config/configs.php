@@ -62,4 +62,6 @@ $configs['char_encoding'] = "utf-8";
 
 $configs['session_auto_start'] = false;
 $configs['catch_all_controller'] = "";
+
+$configs['base_url']=str_replace("/index.php","",$_SERVER['PHP_SELF'])."";
 ?>

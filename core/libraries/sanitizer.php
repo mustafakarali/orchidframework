@@ -17,7 +17,7 @@ class sanitizer
 		{
 			foreach ($array as $_key => $_value)
 			{
-				$_{$key}[$_key] = $this->sanitize($_value); 
+				${$key}[$_key] = $this->sanitize($_value); 
 			}
 		}
 	}
