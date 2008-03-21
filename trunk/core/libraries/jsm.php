@@ -26,6 +26,15 @@ class jsm
 		else
 		echo "<script type='text/javascript' src='{$base}/core/js/scriptaculousc.js' ></script>\n";
 	}
+	
+	function addAccordion()
+	{
+		$base = base::baseUrl();
+		if ($this->gzipenabled)
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=accordion.js' ></script>\n";
+		else
+		echo "<script type='text/javascript' src='{$base}/core/js/accordion.js' ></script>\n";
+	}
 	function loadProtaculous()
 	{
 		$base = base::baseUrl();

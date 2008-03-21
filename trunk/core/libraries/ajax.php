@@ -23,6 +23,11 @@
  *
  *******************************************************************************
 */
+/**
+ * Experimental Library
+ * Might be removed from Production Release as jQuery is already bundled.
+ *
+ */
 
 class Ajax {
 	
