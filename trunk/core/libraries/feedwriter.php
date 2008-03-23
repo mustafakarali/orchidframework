@@ -74,12 +74,12 @@
 	}
 	
 	/**
-	* Genarate the actual RSS/ATOM file
+	* Generate the actual RSS/ATOM file
 	* 
 	* @access   public
 	* @return   void
 	*/ 
-	public function genarateFeed()
+	public function generateFeed()
 	{
 		header("Content-type: text/xml");
 		
