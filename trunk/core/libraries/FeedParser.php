@@ -3,12 +3,15 @@
 	|                       PHP Universal Feed Parser                        |   
 	+------------------------------------------------------------------------/
 
-	Author          : Anis uddin Ahmad <anisniit@gmail.com>
+	Author          : Anis uddin Ahmad <admin@ajaxray.com>
 	Web             : http://www.ajaxray.com
 	Publish Date    : March 24, 2008
 
 LICENSE
 ----------------------------------------------------------------------
+PHP Universal Feed Parser 1.0 - A PHP class to parse RSS 1.0, RSS 2.0 and ATOM 1.0 feed.
+Copyright (C) 2008  Anis uddin Ahmad <admin@ajaxray.com>
+	
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License (GPL)
 as published by the Free Software Foundation; either version 2
@@ -30,7 +33,7 @@ It's very easy to use. Just follow this 3 steps:
 2. Create an object of FeedParser class
 	$Parser = new FeedParser();
 3. Parse the URL you want to featch
-	$Parser->parse('http://www.sitepoint.com/rss.php');//rss1
+	$Parser->parse('http://www.sitepoint.com/rss.php');
 	
 Done. 
 Now you can use this functions to get various information of parsed feed:
@@ -67,7 +70,7 @@ To see more details and examples, please visit:
 * Parses RSS 1.0, RSS2.0 and ATOM Feed
 * 
 * @license     GNU General Public License (GPL)                            
-* @author      Anis uddin Ahmad <anisniit@gmail.com>
+* @author      Anis uddin Ahmad <admin@ajaxray.com>
 * @link        http://www.ajaxray.com/blog/php-universal-feed-parser
 */
 class FeedParser{
