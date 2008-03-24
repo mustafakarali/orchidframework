@@ -28,19 +28,19 @@ It's very easy to use. Just follow this 3 steps:
 1. Include the file 
 	include('FeedParser.php');
 2. Create an object of FeedParser class
-	$rssParser = new FeedParser();
+	$Parser = new FeedParser();
 3. Parse the URL you want to featch
-	$rssParser->parse('http://www.sitepoint.com/rss.php');//rss1
+	$Parser->parse('http://www.sitepoint.com/rss.php');//rss1
 	
 Done. 
 Now you can use this functions to get various information of parsed feed:
-	1. $rssParser->getChannels()        - To get all channel elements as array
-	2. $rssParser->getItems()           - To get all feed elements as array
-	3. $rssParser->getChannel($name)    - To get a channel element by name
-	4. $rssParser->getItem($index)      - To get a feed element as array by it's index
-	5. $rssParser->getTotalItems()      - To get the number of total feed elements
-	6. $rssParser->getFeedVersion()     - To get the detected version of parsed feed
-	7. $rssParser->getParsedUrl()       - To get the parsed feed URL 
+	1. $Parser->getChannels()        - To get all channel elements as array
+	2. $Parser->getItems()           - To get all feed elements as array
+	3. $Parser->getChannel($name)    - To get a channel element by name
+	4. $Parser->getItem($index)      - To get a feed element as array by it's index
+	5. $Parser->getTotalItems()      - To get the number of total feed elements
+	6. $Parser->getFeedVersion()     - To get the detected version of parsed feed
+	7. $Parser->getParsedUrl()       - To get the parsed feed URL  
 	
 ======================================================================= 
 
