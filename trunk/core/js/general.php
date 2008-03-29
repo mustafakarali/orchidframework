@@ -54,4 +54,3 @@ function orchid()
 	}
 	//cookie functions end
 }
-

@@ -73,7 +73,7 @@ class router
 		if (count($_POST)>0)
 		{
 			foreach ($_POST as $key=>$val)
-			$this->params[$key]=$val;
+			$this->params[$key]=trim($val);
 		}
 		$post->paramcounts=count($_POST);
 		return $this->params;
@@ -85,7 +85,7 @@ class router
 		if (count($_POST)>0)
 		{
 			foreach ($_POST as $key=>$val)
-			$post->$key = $val;
+			$post->$key = trim($val);
 		}
 		$post->paramcounts=count($_POST);
 		return $post;

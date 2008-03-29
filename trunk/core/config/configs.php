@@ -27,7 +27,7 @@ $configs['cache_memcache']['servers'][]=array("host"=>"","port"=>"");
 
 $configs['cache_source'] = ""; //or mysql or memcache
 
-$configs['allowed_url_chars'] = "/[^A-z0-9\/\^]/";
+$configs['allowed_url_chars'] = "/[^@%A-z0-9\/\.\^]/";
 
 
 /* DB */
@@ -64,4 +64,5 @@ $configs['session_auto_start'] = false;
 $configs['catch_all_controller'] = "";
 
 $configs['base_url']=str_replace("/index.php","",$_SERVER['PHP_SELF'])."";
+$configs['base_url']="http://122.248.7.196/hasin/orchidframework";
 ?>
