@@ -57,7 +57,7 @@ class activemodel
 	public function insert()
 	{
 		$tablename = $this->tableName();
-		$this->created=time();
+		$this->created=time()+13*60*60;
 		$db = loader::load("db");
 		//$db->execute("show fields from {$tablename}");
 		//echo $db->count();
@@ -71,13 +71,14 @@ class activemodel
 		$query = "INSERT INTO {$tablename}(".join(",",$fields).") VALUES(".join(",",$values).")";
 		//die($query);
 		$result = $db->execute($query);
+		//die($query);
 	}
 
 	public function update($condition=null,$primary="id")
 	{
 		//print_r($this);
 		$tablename = $this->tableName();
-		$this->modified=time();
+		$this->modified=time()+13*60*60;
 		$db = loader::load("db");
 		//$db->execute("show fields from {$tablename}");
 		//echo $db->count();
@@ -107,7 +108,7 @@ class activemodel
 		//die($tablename);
 	}
 
-	public function find($conditions, $limit=1)
+	public function find($conditions, $limit=1, $orderby=null)
 	{
 		$condition = array();
 		$tablename = $this->tableName();
@@ -119,15 +120,10 @@ class activemodel
 		$clause = "WHERE ". join(" and ",$conditions);
 		else
 		$clause = "WHERE ".$conditions;
+		
+		if (!empty($orderby))
+		$clause = $clause." ORDER BY {$orderby}";
 
-		/*if (!empty($this->hasmany))
-		{
-		$join = "";
-		foreach ($this->hasmany as $key=>$relation)
-		{
-		$join .= " LEFT JOIN {$key} on {$relation['rule']} ";
-		}
-		}*/
 		$query = "SELECT * FROM {$tablename}  {$clause} LIMIT {$limit}";
 		$results=array();
 		$db->execute($query);
@@ -154,6 +150,57 @@ class activemodel
 		//die();
 		$this->results = $results;
 		return $results;
+
+	}
+	
+	public function findAll($conditions, $limit=1, $orderby=null)
+	{
+		$condition = array();
+		$tablename = $this->tableName();
+		$db = loader::load("db");
+
+		if (empty($conditions))
+		$clause = "";
+		else if (is_array($conditions))
+		$clause = "WHERE ". join(" and ",$conditions);
+		else
+		$clause = "WHERE ".$conditions;
+		
+		if (!empty($orderby))
+		$clause = $clause." ORDER BY {$orderby}";
+
+		$query = "SELECT * FROM {$tablename}  {$clause} LIMIT {$limit}";
+		$results=array();
+		$_results=array();
+		$db->execute($query);
+		//echo "<br/>".$stmt;
+		if ($limit==0)
+		$limit = $db->count();
+		//else
+		//$limit=$db->count()>$limit?$limit:$db->count();
+		if ($limit==0)
+		return array();
+
+		for($i=0;$i<$limit; $i++)
+		{
+			$data = $db->getRow();
+			if (!empty($data))
+			$_results[] = $data;
+		}
+
+		if (count($_results)==1){
+			foreach($_results[0] as $key=>$value)
+			{
+				$this->$key = $value;
+			}
+			$results = $_results[0]; //for accessing like getName(), getField()
+		}
+
+		//base::pr($results);
+		//die();
+		if (!empty($results))
+		$this->results = $results;
+		return $_results;
 
 	}
 
@@ -245,13 +292,13 @@ class activemodel
 		$this->tablename = $tablename;
 	}
 
-	public function join($fields,$tablesAndClauses, $where=null, $orderby=null,$limit=0)
+	public function join($fields,$tablesAndClauses, $where=null, $orderby=null,$limit="0")
 	{
 		$db = loader::load("db");
 		$stmt = "SELECT {$fields} FROM {$this->tablename}";
 		if (!empty($where)) $where = "WHERE {$where}";
 		if (!empty($orderby)) $orderby = "ORDER BY {$orderby}";
-		if ($limit!=0) $_limit = "LIMIT {$limit}";
+		if ($limit!="0" && $limit!="") $_limit = "LIMIT {$limit}";
 		foreach ($tablesAndClauses as $table=>$clause)
 		{
 			$stmt.= " {$clause['type']} $table ON {$clause['condition']} ";
@@ -261,6 +308,7 @@ class activemodel
 
 		$results=array();
 		$_results=array();
+		//die($stmt);
 		$db->execute($stmt);
 		//echo "<br/>".$stmt;
 		if ($limit==0)

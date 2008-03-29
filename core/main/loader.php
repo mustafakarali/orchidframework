@@ -29,7 +29,8 @@ class loader
 		"jsm",
 		"cssm",
 		"helper",
-		"bookmark");
+		"bookmark",
+		"cache");
 
 		if (!in_array($object,$valid))
 		{

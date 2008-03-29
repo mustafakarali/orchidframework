@@ -67,7 +67,7 @@ class view
 		$result = $this->do_post_request($url,$content);
 		if ($return)
 		return $result;
-		else 
+		else
 		echo $result;
 	}
 
@@ -92,13 +92,16 @@ class view
 		}
 		return $response;
 	}
-	
+
 	public function displayErrors()
 	{
-		$title = $this->lang->error_title;
-		if (empty($title)) $title="Error";
+		$cerror = $this->vars['errortitle'];
+		if (empty($cerror)){
+			$title = $this->lang->error_title;
+			if (empty($title)) $title="Error";
+		}
 		$_errors = $this->vars['_errors'];
-		
+
 		if (!empty($_errors))
 		{
 			echo "<div id='_internalerror' class='error'>";
@@ -106,6 +109,7 @@ class view
 			echo "<ul>";
 			foreach ($_errors as $key=>$_error)
 			{
+				$_error = showEmoticons($_error);
 				echo "<li>{$_error}</li>";
 			}
 			echo "</ul></div>";

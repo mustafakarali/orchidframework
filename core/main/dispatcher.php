@@ -106,13 +106,12 @@ class dispatcher
 			$app->cssm->addCoreCSS();
 		}
 		else
-		echo $rawoutput;
+		echo trim($rawoutput);
 
 		if (isset($start))
 		echo "<div style='clear:both;'><p style='padding-top:25px;' >Total time for dispatching is : ".(microtime(true)-$start)." seconds.</p></div>";
 		$output = ob_get_clean();
-
-		echo $output;
+		echo trim($output);
 
 	}
 }

@@ -113,6 +113,15 @@ class jsm
 		echo "<script type='text/javascript' src='{$base}/core/js/general.php' ></script>\n";
 	}
 	
+	function addPNGFix()
+	{
+		$base = base::baseUrl();
+		if ($this->gzipenabled)
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=pngfix.js' ></script>\n";
+		else
+		echo "<script type='text/javascript' src='{$base}/core/js/pngfix.js' ></script>\n";
+	}
+	
 	function addThickBox()
 	{
 		$this->loadJquery();
@@ -139,6 +148,15 @@ class jsm
 		$config = loader::load("config");
 		$this->gzipenabled = $config->js_gzip_enabled;
 		$this->addGenericVars();
+	}
+	
+	function addIE8()
+	{
+		$base = base::baseUrl();
+		if ($this->gzipenabled)
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=ie8.js' ></script>\n";
+		else
+		echo "<script type='text/javascript' src='{$base}/core/js/ie8.js' ></script>\n";
 	}
 }
 ?>

@@ -16,6 +16,7 @@ class cachesqlite implements cachemanager
 
 		$this->cachefile = $this->cachebase.$this->cachefile;
 
+		
 		if (!file_exists($this->cachefile))
 		{
 			$this->cachedb = sqlite_open($this->cachefile,0666);
