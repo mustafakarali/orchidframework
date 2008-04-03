@@ -427,8 +427,7 @@
 	
  } // end of class FeedWriter
 
-?>
-<?php
+
  /**
  * Univarsel Feed Writer
  * 
