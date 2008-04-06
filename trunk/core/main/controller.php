@@ -40,11 +40,14 @@ Abstract class controller
 	{
 		$this->post = $post;
 	}
-	
-	public function redirect($controller, $action="base")
+	public function redirect($controller, $action="base", $params=array(), $postparams=array())
 	{
 		$this->redirectcontroller=$controller;
 		$this->redirectaction=$action;
+		if(!empty($params))
+		$this->params = $params;
+		if(!empty($postparams))
+		$this->post= $postparams;
 	}
 	
 	public function redirectUrl($controller, $action="base")
@@ -54,7 +57,11 @@ Abstract class controller
 		header("location: {$url}");
 		die();
 	}
-	
+	public function redirecExternaltUrl($url)
+	{
+		header("location: {$url}");
+		die();
+	}
 	public function setView($view)
 	{
 		$this->template = $view;
