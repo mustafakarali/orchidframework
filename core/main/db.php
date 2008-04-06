@@ -19,6 +19,10 @@ class db
 		$config = loader::load("config");
 		$dbengineinfo = $config->db;
 		
+		$state = $dbengineinfo['state'];
+		if (!empty($state))
+		$this->state = $state;
+		
 		if (empty($dbengineinfo[$this->state]['dbtype']))
 		throw new Exception("You must specify database driver details.");
 		if ($dbengineinfo['usedb']!=false)

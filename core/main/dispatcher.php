@@ -76,8 +76,14 @@ class dispatcher
 				//die("called a redirect");
 				$controller = $app->redirectcontroller;
 				$action = $app->redirectaction;
+				$params = $app->params;
+				$postparams = $app->post;
 				$app->redirectcontroller="";
 				$app->redirectaction="";
+				if(!empty($params))
+				$app->params = $params;
+				if(!empty($postparams))
+				$app->post= $postparams;
 			}
 			//end redirect processing
 		}

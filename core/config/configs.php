@@ -32,6 +32,7 @@ $configs['allowed_url_chars'] = "/[^@%A-z0-9\/\.\^]/";
 
 /* DB */
 $configs['db']['usedb']="";
+$configs['db']['state']="development";
 $configs['db']['production']['dbname']="";
 $configs['db']['production']['dbhost']="";
 $configs['db']['production']['dbuser']="";
