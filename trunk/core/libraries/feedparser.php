@@ -243,7 +243,7 @@ class FeedParser{
 		
 		if(empty($this->version))
 		{
-			die('Sorry! cannot detected the feed version.');
+			die('Sorry! cannot detect the feed version.');
 		}
 	}   
    
