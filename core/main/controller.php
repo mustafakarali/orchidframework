@@ -7,6 +7,8 @@
  * @copyright 	New BSD License
  * @version 	0.1	
  */
+define ("HOOK_PRE_ACTION",1);
+define ("HOOK_POST_ACTION",2);
 Abstract class controller
 {
 	private $params;
@@ -18,10 +20,14 @@ Abstract class controller
 	public $template;
 	private $errors;
 	public $error=false;
+	public $pre_action_hooks=array();
+	public $post_action_hooks=array();
 	
 	function __construct()
 	{
 		$this->errors = array();
+		$this->pre_action_hooks=array();
+		$this->post_action_hooks=array();
 	}
 	
 	private function __get($var)
@@ -83,6 +89,29 @@ Abstract class controller
 		$this->view->set($key,$value);
 	}
 	
+	function installHook($callback,$hookType=null)
+	{
+		if (HOOK_PRE_ACTION==$hookType)
+		{
+			$this->pre_action_hooks[$callback]=$callback;
+		}
+		else if (HOOK_POST_ACTION==$hookType)
+		{
+			$this->post_action_hooks[$callback]=$callback;
+		}
+	}
+	
+	public function getPreActionHooks()
+	{
+		return $this->pre_action_hooks;
+	}
+	
+	public function getPostActionHooks()
+	{
+		return $this->post_action_hooks;
+	}
+	
+
 	function base(){}
 }
 ?>

@@ -66,8 +66,26 @@ class dispatcher
 			
 			$app->setParams($params);
 			$app->setPostParams($router->getPostParams());
+			
+			//add pre action hook execution
+			$preActionHooks = $app->getPreActionHooks();
+			if(!empty($preActionHooks))
+			{
+				foreach ($preActionHooks as $preHook)
+				$app->$preHook();
+			}
+			//execute the action
 			$app->$action();
 
+			
+			//add post action hook execution
+			$postActionHooks = $app->getPostActionHooks();
+			if(!empty($postActionHooks))
+			{
+				foreach ($postActionHooks as $postHook)
+				$app->$postHook();
+			}
+			
 			//check if the controller calls for a redirect
 			if(empty($app->redirectcontroller))
 			$redirect=false;
