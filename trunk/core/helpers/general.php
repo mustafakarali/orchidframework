@@ -301,4 +301,11 @@ function generatePassword ($length = 6)
   return $password;
 
 }
+
+function isPOST()
+{
+	if (count($_POST)>0)
+	return true;
+	return false;
+}
 ?>

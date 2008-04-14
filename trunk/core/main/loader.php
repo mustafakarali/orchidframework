@@ -13,6 +13,7 @@ class loader
 	public static function load($object)
 	{
 		$valid = array(	"library",
+		"benchmark",
 		"view",
 		"model",
 		"helper",

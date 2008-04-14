@@ -6,9 +6,7 @@ $configs['global_profile']=false;
 
 /* DB */
 $configs['db']['usedb']="mysql";
-
-
-$configs['db']['development']['dbname']="gopsop";
+$configs['db']['development']['dbname']="test";
 $configs['db']['development']['dbhost']="localhost";
 $configs['db']['development']['dbuser']="root";
 $configs['db']['development']['dbpwd']="root1234";
