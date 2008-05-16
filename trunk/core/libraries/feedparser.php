@@ -60,7 +60,7 @@ IMPORTANT NOTES
 EXAMPLES
 -----------------------------------------------------------------------
 To see more details and examples, please visit:
-	http://www.ajaxray.com/blog/php-universal-feed-parser
+	http://www.ajaxray.com/blog/2008/05/02/php-universal-feed-parser-lightweight-php-class-for-parsing-rss-and-atom-feeds/
 ========================================================================
 */
 
@@ -71,7 +71,7 @@ To see more details and examples, please visit:
 * 
 * @license     GNU General Public License (GPL)                            
 * @author      Anis uddin Ahmad <admin@ajaxray.com>
-* @link        http://www.ajaxray.com/blog/php-universal-feed-parser
+* @link        http://www.ajaxray.com/blog/2008/05/02/php-universal-feed-parser-lightweight-php-class-for-parsing-rss-and-atom-feeds/
 */
 class FeedParser{
 		
@@ -228,18 +228,25 @@ class FeedParser{
 	public function parse($url)
 	{
 		$this->url  = $url;
-	   
-		$fp         = fopen($url,"r") or die("Error reading RSS data.");
-		while($data = fread($fp, 4096))
-		{
-			xml_parse($this->xmlParser, $data, feof($fp))
-			   or die(sprintf("XML error: %s at line %d",  
-			   xml_error_string(xml_get_error_code($this->xmlParser)),  
-			   xml_get_current_line_number($this->xmlParser)));
+		$URLContent = $this->getUrlContent();
+		
+		if($URLContent)
+		{   
+			$segments   = str_split($URLContent, 4096);
+			foreach($segments as $index=>$data)
+			{
+				$lastPiese = ((count($segments)-1) == $index)? true : false;
+				xml_parse($this->xmlParser, $data, $lastPiese)
+				   or die(sprintf("XML error: %s at line %d",  
+				   xml_error_string(xml_get_error_code($this->xmlParser)),  
+				   xml_get_current_line_number($this->xmlParser)));
+			}
+			xml_parser_free($this->xmlParser);   
 		}
-	   
-		fclose($fp);
-		xml_parser_free($this->xmlParser);   
+		else
+		{
+			die('Sorry! cannot load the feed url.');	
+		}
 		
 		if(empty($this->version))
 		{
@@ -253,6 +260,50 @@ class FeedParser{
    | Private functions. Be careful to edit them.                            |   
    +-----------------------------------------------------------------------*/
 
+   /**
+	* Load the whole contents of a RSS/ATOM page
+	* 
+	* @access   private
+	* @return   string
+	*/ 
+	private function getUrlContent()
+	{
+		if(empty($this->url))
+		{
+			throw new Exception("URL to parse is empty!.");
+			return false;
+		}
+	
+		if($content = @file_get_contents($this->url))
+		{
+			return $content;
+		}
+		else
+		{
+			$ch         = curl_init();
+			
+			curl_setopt($ch, CURLOPT_URL, $this->url);
+			curl_setopt($ch, CURLOPT_HEADER, false);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+			$content    = curl_exec($ch);
+			$error      = curl_error($ch);
+			
+			curl_close($ch);
+			
+			if(empty($error))
+			{
+				return $content;	
+			}
+			else
+			{
+				throw new Exception("Erroe occured while loading url by cURL. <br />\n" . $error) ;
+				return false;
+			}
+		}
+	
+	}
+	
 	/**
 	* Handle the start event of a tag while parsing
 	* 
@@ -261,7 +312,7 @@ class FeedParser{
 	* @param    string  name of currently entering tag
 	* @param    array   array of attributes
 	* @return   void
-	*/   
+	*/ 
 	private function startElement($parser, $tagName, $attrs) 
 	{
 		if(!$this->version)
