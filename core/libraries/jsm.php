@@ -14,17 +14,17 @@ class jsm
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
-		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=prototypec.js' ></script>\n";
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js' ></script>\n";
 		else
-		echo "<script type='text/javascript' src='{$base}/core/js/prototypec.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js' ></script>\n";
 	}
 	function loadScriptaculous()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
-		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=scriptaculousc.js' ></script>\n";
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js' ></script>\n";
 		else
-		echo "<script type='text/javascript' src='{$base}/core/js/scriptaculousc.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js' ></script>\n";
 	}
 	
 	function addAccordion()
@@ -39,21 +39,21 @@ class jsm
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled){
-			echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=prototypec.js' ></script>\n";
-			echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=scriptaculousc.js'></script>\n";
+			echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js' ></script>\n";
+			echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js'></script>\n";
 		}
 		else {
-			echo "<script type='text/javascript' src='{$base}/core/js/prototypec.js' ></script>\n";
-			echo "<script type='text/javascript' src='{$base}/core/js/scriptaculousc.js'></script>\n";
+			echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js' ></script>\n";
+			echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js'></script>\n";
 		}
 	}
 	function loadJquery()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
-		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=jqueryc.js' ></script>\n";
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' ></script>\n";
 		else
-		echo "<script type='text/javascript' src='{$base}/core/js/jqueryc.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' ></script>\n";
 	}
 	/**
 	 * app specific libraries
