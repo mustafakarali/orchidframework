@@ -48,12 +48,10 @@ class base{
 
 		if ($uselayout) {
 			$layoutdata = ob_get_clean();
-			$layoutfilelocal = "app/views/{$controller}/{$controller}.php";
+			//$layoutfilelocal = "app/views/{$controller}/{$controller}.php";
 			$layoutfileglobal = "app/views/layouts/{$controller}.php";
 
-			if (file_exists($layoutfilelocal))
-			include_once($layoutfilelocal);
-			else
+			if (file_exists($layoutfileglobal))
 			include_once($layoutfileglobal);
 		}
 	}
