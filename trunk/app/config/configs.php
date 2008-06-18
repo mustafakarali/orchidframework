@@ -1,7 +1,7 @@
 <?
 $configs['use_layout']=true;
 $configs['unit_test_enabled']=false;
-$configs['default_controller']="gopsop";
+$configs['default_controller']="welcome";
 $configs['global_profile']=false;
 
 /* DB */
@@ -26,5 +26,5 @@ $configs['js_gzip_enabled'] = false;
 
 $configs['session_auto_start'] = true;
 
-$configs['catch_all_controller'] = "gopsop";
+$configs['catch_all_controller'] = "";
 ?>
