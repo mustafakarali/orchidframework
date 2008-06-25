@@ -184,6 +184,7 @@ class FeedParser{
 			throw new Exception("Channel tag $tagName not found.");
 			return false;
 		}
+		
 	}
    
 	/**
@@ -360,6 +361,7 @@ class FeedParser{
 		{
 			$data = strtotime($data);
 		}
+		$data = $this->manualFix($data);
 				 
 	   if($this->inChannel())
 	   {
@@ -472,6 +474,20 @@ class FeedParser{
 				return;
 			}    
 		}
+		
+		// If customized or no namespace used, try to detect with root tag name
+		if($tagName == 'RSS' && $attrs['VERSION'] == '2.0')
+		{
+			$this->version = 'RSS 2.0';
+		}
+		elseif($tagName == 'rdf:RDF')
+		{
+			$this->version = 'RSS 1.0';
+		}
+		elseif($tagName == 'feed')
+		{
+			$this->version = 'ATOM 1';
+		}
 	}
 	
 	private function getParentTag()
@@ -540,7 +556,7 @@ class FeedParser{
 	* @return   string
 	*/   
 	private function unhtmlentities($string) 
-	{
+	{ return $string;
 		// Get HTML entities table
 		$trans_tbl = get_html_translation_table (HTML_ENTITIES, ENT_QUOTES);
 		// Flip keys<==>values
@@ -549,6 +565,11 @@ class FeedParser{
 		$trans_tbl += array('&apos;' => "'");
 		// Replace entities by values
 		return strtr ($string, $trans_tbl);
+	}
+	
+	function manualFix($data)
+	{
+		return str_replace('&#60;','&lt;', $data);
 	}
 } //End class FeedParser
 ?>
