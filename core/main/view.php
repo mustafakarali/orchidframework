@@ -33,6 +33,7 @@ class view
 	public function getVars(&$controller=null)
 	{
 		if (!empty($controller)) $this->vars['app']=$controller;
+		$this->vars['lang']=$this->lang;
 		return $this->vars;
 	}
 
@@ -57,6 +58,25 @@ class view
 		$basepath = base::basePath();
 		$filepath = $basepath."/app/views/{$controller}/{$view}.php";
 		include($filepath);
+	}
+	
+	public function addRenderedAction($controller,$action="base", $extra="")
+	{
+		$basepath = base::baseUrl();
+		$url = $basepath."/{$controller}/{$action}/{$extra}";
+		return file_get_contents($url);
+	}
+	
+	public function addAjaxComponent($container ,$controller,$action="base", $extra="{}")
+	{
+		$basepath = base::baseUrl();
+		$url = $basepath."/{$controller}/{$action}";
+		$data = "<script>
+		$(document).ready(function(){
+			$('#{$container}').load('{$url}',{$extra});
+		});
+		</script>";
+		return $data;
 	}
 
 	public function addRenderedView($url, $postparams, $return=true)

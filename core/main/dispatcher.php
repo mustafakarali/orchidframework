@@ -75,6 +75,7 @@ class dispatcher
 				$app->$preHook();
 			}
 			//execute the action
+			$app->use_layout = $config->use_layout;
 			$app->$action();
 
 			
@@ -116,9 +117,8 @@ class dispatcher
 		$view = loader::load("view");
 		$view->set("_errors",$app->getError());
 		$viewvars = $view->getVars($app);
-		$uselayout = $config->use_layout;
-
-		if (!$app->use_layout) $uselayout=false;
+		
+		$uselayout=$app->use_layout; //modified june 21 for easy overriding via any controller
 
 		if (!empty($app->template))
 		$view->setTemplate($app->template);
@@ -127,7 +127,7 @@ class dispatcher
 
 		if ($app->use_view==true){
 			base::_loadTemplate($controller, $template, $viewvars, $uselayout);
-			//$app->cssm->addCoreCSS();
+			$app->cssm->addCoreCSS();
 		}
 		else
 		echo trim($rawoutput);
