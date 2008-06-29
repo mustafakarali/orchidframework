@@ -556,7 +556,7 @@ class FeedParser{
 	* @return   string
 	*/   
 	private function unhtmlentities($string) 
-	{ return $string;
+	{
 		// Get HTML entities table
 		$trans_tbl = get_html_translation_table (HTML_ENTITIES, ENT_QUOTES);
 		// Flip keys<==>values
