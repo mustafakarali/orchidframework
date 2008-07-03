@@ -75,7 +75,17 @@ class router
 			foreach ($_POST as $key=>$val)
 			$this->params[$key]=trim($val);
 		}
-		$post->paramcounts=count($_POST);
+
+		if(count($_GET)>1)
+		{
+			$g =0;
+			foreach ($_GET as $key=>$val)
+			{
+				$g++;
+				if($g>1)
+				$this->params[$key]=trim($val);
+			}
+		}
 		return $this->params;
 	}
 	
