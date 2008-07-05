@@ -219,5 +219,32 @@ Abstract class controller
 
 
 	function base(){}
+	
+	function setupFacebookEnvironment()
+	{
+		$this->helper->facebook;
+		$this->helper->facebook_rest_lib;
+
+		$apiKey = $this->config->facebook_api_key;
+		$secretKey = $this->config->facebook_secret_key;
+
+		$facebook = new Facebook($apiKey,$secretKey);
+		
+		$facebook->require_frame();
+		$fbuser = $facebook->require_login();
+		$this->fbuser = $fbuser;
+		// Catch the exception that gets thrown if the cookie has an invalid session_key in it
+		try {
+			if (!$facebook->api_client->users_isAppAdded()) {
+				$facebook->redirect($facebook->get_add_url());
+			}
+		} catch (Exception $ex) {
+			// This will clear cookies for your application and redirect them to a login prompt
+			$facebook->set_user(null, null);
+			$facebook->redirect($callbackUrl);
+		}
+		$this->facebook = $facebook;
+		$this->setViewParam("fbuser",$fbuser);
+	}
 }
 ?>

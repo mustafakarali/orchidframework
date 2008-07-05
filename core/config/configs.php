@@ -66,4 +66,11 @@ $configs['catch_all_controller'] = "";
 
 $configs['base_url']=str_replace("/index.php","",$_SERVER['PHP_SELF'])."";
 $configs['base_url']="http://122.248.7.196/hasin/orchidframework";
+
+$configs['facebook_app_name'] = "App Name";
+$configs['facebook_api_key'] = "App API Key";
+$configs['facebook_secret_key'] = "App Secret Key";
+$configs['facebook_app_url'] = "App facebook url, with trailing slash";
+$configs['facebook_callback_url'] = "App Callback Url - with trailing slash";
+
 ?>
