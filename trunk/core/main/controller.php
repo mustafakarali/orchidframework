@@ -98,6 +98,14 @@ Abstract class controller
 	 * @var array
 	 */
 	public $post_action_hooks=array();
+	
+	/**
+	 * protected variable to store the currently logged in user in facebook. used only when you use orchid to develop facebook application
+	 *
+	 * @var string
+	 */
+	
+	protected $fbuser;
 
 	function __construct()
 	{
@@ -132,6 +140,17 @@ Abstract class controller
 	{
 		$this->post = $post;
 	}
+	
+	
+	/**
+	 * if called from any action, this will let dispatcher redircet orchid to this controller and action, without changing the url. 
+	 * users can also pass a set of parameters to it to simulate GET and POST request. 
+	 *
+	 * @param string $controller
+	 * @param string $action
+	 * @param array $params contains all GET params
+	 * @param array $postparams contains all POST params
+	 */
 	public function redirect($controller, $action="base", $params=array(), $postparams=array())
 	{
 		$this->redirectcontroller=$controller;
@@ -142,6 +161,13 @@ Abstract class controller
 		$this->post= $postparams;
 	}
 
+	/**
+	 * when called from inside an action, orchid will send a relocation header to browser and redirect to that specific
+	 * controller and action.
+	 *
+	 * @param string $controller
+	 * @param string $action
+	 */
 	public function redirectUrl($controller, $action="base")
 	{
 		$baseurl = base::baseUrl();
@@ -149,29 +175,53 @@ Abstract class controller
 		header("location: {$url}");
 		die();
 	}
+	
+	/**
+	 * this is almost same as redirectUrl() except it takes an external url and redirect browser to that location. 
+	 *
+	 * @param string $url
+	 */
 	public function redirecExternaltUrl($url)
 	{
 		header("location: {$url}");
 		die();
 	}
+	
+	/**
+	 * this function is used to pass the name of any view file to render the output. by default a view file with same name of the action is
+	 * considered for rendering the content, but user can override that anytime. 
+	 *
+	 * @param string $view
+	 */
 	public function setView($view)
 	{
 		$this->template = $view;
 	}
 
+	/**
+	 * this function takes a string as error message and store it in the error queue. so users can call to it unlimited times. 
+	 * after the request processing is finished, orchid displays these error in a nicely formated error view. 
+	 *
+	 * @param string $errorMsg
+	 */
 	public function setError($errorMsg)
 	{
 		$this->errors[md5($errorMsg)]= $errorMsg;//to avoid storing multiple errors for many times, used this hash
 		$this->error = true;
 	}
 
+	/**
+	 * this function is used by orchid core to parse the error messages to render as output
+	 *
+	 * @return unknown
+	 */
 	public function getError()
 	{
 		return $this->errors;
 	}
 
 	/**
-	 * set a parameter to view scope
+	 * set a parameter to view scope. user can pass any name as key, and then access it as a variable in view file. 
 	 *
 	 * @param string $key
 	 * @param string $value
@@ -195,6 +245,12 @@ Abstract class controller
 		}
 	}
 
+	/**
+	 * install a pre action and post action hook to execute before and after of any action. 
+	 *
+	 * @param string $callback
+	 * @param string $hookType
+	 */
 	function installHook($callback,$hookType=null)
 	{
 		if (HOOK_PRE_ACTION==$hookType)
@@ -207,19 +263,39 @@ Abstract class controller
 		}
 	}
 
+	/**
+	 * return an array of pre action hooks to orchid core. used internally
+	 *
+	 * @return array
+	 */
 	public function getPreActionHooks()
 	{
 		return $this->pre_action_hooks;
 	}
 
+	/**
+	 * returns a list of post action hooks, used internally
+	 *
+	 * @return unknown
+	 */
 	public function getPostActionHooks()
 	{
 		return $this->post_action_hooks;
 	}
 
 
+	/**
+	 * an abstract default method
+	 *
+	 */
 	function base(){}
 	
+	/**
+	 * this is another interesting function which users can call in the __constructor() of the controller or setup as a pre action hook 
+	 * for developing facebook applications. this function setup the environment for developing facebook applications, loads necessary
+	 * library files and process the authentication properly
+	 *
+	 */
 	function setupFacebookEnvironment()
 	{
 		$this->helper->facebook;
