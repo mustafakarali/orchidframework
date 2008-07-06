@@ -69,8 +69,9 @@ class activemodel
 			$values[] = !isset($this->{$fieldname})?'null':"'{$this->$fieldname}'";
 		}
 		$query = "INSERT INTO {$tablename}(".join(",",$fields).") VALUES(".join(",",$values).")";
-		//die($query);
-		$result = $db->execute($query);
+		echo("<br/>".$query);
+		$insertId = $db->execute($query);
+		return $insertId;
 		//die($query);
 	}
 

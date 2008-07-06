@@ -37,6 +37,8 @@ class pgsqldriver extends abstractdbdriver
 		}
 		$this->results[$hash] = pg_query($this->connection,$sql);
 
+		if("insert"==$type) return $this->insertId();
+		return true;
 	}
 
 	public function count()

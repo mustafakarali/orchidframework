@@ -40,6 +40,7 @@ class mysqldriver extends abstractdbdriver
 			$this->results = array(); //clear the result cache
 		}
 		$this->results[$hash] = mysql_query($sql,$this->connection);
+		if("insert"==$type) return $this->insertId();
 		if (!mysql_error($this->connection)) return true;
 		return false;
 

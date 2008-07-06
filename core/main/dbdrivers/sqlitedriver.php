@@ -50,6 +50,7 @@ class sqlitedriver extends abstractdbdriver
 			$this->results = array(); //clear the result cache
 		}
 		$this->results[$hash] = sqlite_query($sql,$this->connection);
+		if("insert"==$type) return $this->insertId();
 	}
 
 	private function prepQuery($sql)
