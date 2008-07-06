@@ -39,6 +39,8 @@ class mssqldriver extends abstractdbdriver
 		$this->results[$hash] = mssql_query($sql,$this->connection);
 
 
+		if("insert"==$type) return $this->insertId();
+		return true;
 	}
 
 	public function count()

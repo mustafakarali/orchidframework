@@ -39,6 +39,8 @@ class mysqlidriver extends abstractdbdriver
 			$this->results = array(); //clear the result cache
 		}
 		$this->results[$hash] = mysqli_query($this->connection,$sql);
+		if("insert"==$type) return $this->insertId();
+		return true;
 	}
 
 	public function count()
