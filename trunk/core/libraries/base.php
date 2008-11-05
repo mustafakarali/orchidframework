@@ -53,7 +53,7 @@ class base{
 
 			if (file_exists($layoutfilelocal))
 			include_once($layoutfilelocal);
-			else 
+			else if (file_exists($layoutfileglobal))
 			include_once($layoutfileglobal);
 		}
 	}

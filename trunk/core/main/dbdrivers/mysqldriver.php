@@ -1,5 +1,5 @@
 <?php
-class mysqldriver extends abstractdbdriver 
+class mysqldriver extends abstractdbdriver
 {
 
 	public function __construct($dbinfo)
@@ -11,7 +11,7 @@ class mysqldriver extends abstractdbdriver
 			else
 			$this->connection = mysql_connect($dbinfo['dbhost'],$dbinfo['dbuser'],$dbinfo['dbpwd']);
 			mysql_select_db($dbinfo['dbname'],$this->connection);
-			
+
 			//mysql_query('SET CHARACTER SET utf8');
 			//mysql_query("SET SESSION collation_connection ='utf8_general_ci'");
 		}
@@ -31,14 +31,17 @@ class mysqldriver extends abstractdbdriver
 		{
 			if (isset($this->results[$hash]))
 			{
-				if (is_resource($this->results[$hash]))
-				return $this->results[$hash];
+				if (is_resource($this->results[$hash])){
+					mysql_data_seek($this->results[$hash],0);
+					return $this->results[$hash];
+				}
 			}
 		}
 		else if("update"==$type || "delete"==$type)
 		{
 			$this->results = array(); //clear the result cache
 		}
+		//echo "\n{$sql}</br/>";
 		$this->results[$hash] = mysql_query($sql,$this->connection);
 		if("insert"==$type) return $this->insertId();
 		if (!mysql_error($this->connection)) return true;
@@ -86,7 +89,7 @@ class mysqldriver extends abstractdbdriver
 		}
 	}
 
-	
+
 	public function affectedRows()
 	{
 		return @mysql_affected_rows($this->connection);
@@ -119,12 +122,12 @@ class mysqldriver extends abstractdbdriver
 		$this->execute('SET AUTOCOMMIT=1');
 		return TRUE;
 	}
-	
-	
-	
+
+
+
 	public function getRow($fetchmode = FETCH_ASSOC)
 	{
-		
+
 		$lastresult = $this->results[$this->lasthash];
 		if (FETCH_ASSOC == $fetchmode)
 		$row = mysql_fetch_assoc($lastresult);
@@ -134,9 +137,10 @@ class mysqldriver extends abstractdbdriver
 		$row = mysql_fetch_object($lastresult);
 		else
 		$row = mysql_fetch_array($lastresult,MYSQL_BOTH);
+		
 		return $row;
 	}
-	
+
 	public function getRowAt($offset=null,$fetchmode = FETCH_ASSOC)
 	{
 		$lastresult = $this->results[$this->lasthash];
@@ -147,12 +151,17 @@ class mysqldriver extends abstractdbdriver
 		return $this->getRow($fetchmode);
 	}
 	
+	public function getLastResult()
+	{
+		return isset($this->results[$this->lasthash])? $this->results[$this->lasthash] : false;
+	}
+
 	public function rewind()
 	{
 		$lastresult = $this->results[$this->lasthash];
 		mysql_data_seek($lastresult, 0);
 	}
-	
+
 	public function getRows($start, $count, $fetchmode = FETCH_ASSOC)
 	{
 		$lastresult = $this->results[$this->lasthash];
@@ -164,14 +173,14 @@ class mysqldriver extends abstractdbdriver
 		}
 		return $rows;
 	}
-	
+
 	function __destruct(){
 		foreach ($this->results as $result)
 		{
 			@mysql_free_result($result);
 		}
 	}
-	
+
 	function getFields($table)
 	{
 		$this->execute("SHOW COLUMNS FROM {$table}");
@@ -182,7 +191,7 @@ class mysqldriver extends abstractdbdriver
 		}
 		return $fields;
 	}
-	
-	
+
+
 }
 ?>

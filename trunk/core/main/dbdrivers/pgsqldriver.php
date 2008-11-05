@@ -1,5 +1,5 @@
 <?php
-class pgsqldriver extends abstractdbdriver 
+class pgsqldriver extends abstractdbdriver
 {
 
 	public function __construct($dbinfo)
@@ -27,8 +27,10 @@ class pgsqldriver extends abstractdbdriver
 		{
 			if (isset($this->results[$hash]))
 			{
-				if (is_resource($this->results[$hash]))
-				return $this->results[$hash];
+				if (is_resource($this->results[$hash])){
+					pg_result_seek($this->results[$hash],0);
+					return $this->results[$hash];
+				}
 			}
 		}
 		else if("update"==$type || "delete"==$type)
@@ -36,7 +38,6 @@ class pgsqldriver extends abstractdbdriver
 			$this->results = array(); //clear the result cache
 		}
 		$this->results[$hash] = pg_query($this->connection,$sql);
-
 		if("insert"==$type) return $this->insertId();
 		return true;
 	}
@@ -77,7 +78,7 @@ class pgsqldriver extends abstractdbdriver
 		}
 	}
 
-	
+
 	public function affectedRows()
 	{
 		return @pg_affected_rows($this->connection);
@@ -88,13 +89,13 @@ class pgsqldriver extends abstractdbdriver
 		$_temp = $this->lasthash;
 		$lastresult = $this->results[$this->lasthash];
 		$this->execute("SELECT version() AS ver");
-		
+
 		$row = $this->getRow();
 		$v = $row['server'];
-		
+
 		$table	= func_num_args() > 0 ? func_get_arg(0) : null;
 		$column	= func_num_args() > 1 ? func_get_arg(1) : null;
-		
+
 		if ($table == null && $v >= '8.1')
 		{
 			$sql='SELECT LASTVAL() as ins_id';
@@ -140,12 +141,12 @@ class pgsqldriver extends abstractdbdriver
 		return @pg_exec($this->connection, "ROLLBACK");
 		return TRUE;
 	}
-	
-	
-	
+
+
+
 	public function getRow($fetchmode = FETCH_ASSOC)
 	{
-		
+
 		$lastresult = $this->results[$this->lasthash];
 		if (FETCH_ASSOC == $fetchmode)
 		$row = pg_fetch_assoc($lastresult);
@@ -157,7 +158,7 @@ class pgsqldriver extends abstractdbdriver
 		$row = pg_fetch_array($lastresult,PGSQL_BOTH);
 		return $row;
 	}
-	
+
 	public function getRowAt($offset=null,$fetchmode = FETCH_ASSOC)
 	{
 		$lastresult = $this->results[$this->lasthash];
@@ -167,13 +168,13 @@ class pgsqldriver extends abstractdbdriver
 		}
 		return $this->getRow($fetchmode);
 	}
-	
+
 	public function rewind()
 	{
 		$lastresult = $this->results[$this->lasthash];
 		pg_result_seek($lastresult, 0);
 	}
-	
+
 	public function getRows($start, $count, $fetchmode = FETCH_ASSOC)
 	{
 		$lastresult = $this->results[$this->lasthash];
@@ -184,15 +185,15 @@ class pgsqldriver extends abstractdbdriver
 		}
 		return $rows;
 	}
-	
+
 	function __destruct(){
 		foreach ($this->results as $result)
 		{
 			@pg_free_result($result);
 		}
 	}
-	
-	
+
+
 	function getFields($table)
 	{
 		$this->execute("SELECT column_name FROM information_schema.columns WHERE table_name = {$table}");
@@ -203,7 +204,7 @@ class pgsqldriver extends abstractdbdriver
 		}
 		return $fields;
 	}
-	
-	
+
+
 }
 ?>

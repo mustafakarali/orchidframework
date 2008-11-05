@@ -25,7 +25,7 @@ class router
 			$default_controller = $config->default_controller;
 			if (!empty($default_controller))
 			$path[0] = $default_controller;
-			else 
+			else
 			$path[0] = "index";
 		}
 		$route= $path[0];
@@ -88,7 +88,7 @@ class router
 		}
 		return $this->params;
 	}
-	
+
 	public function getPostParams()
 	{
 		$post = new stdClass();
@@ -100,7 +100,7 @@ class router
 		$post->paramcounts=count($_POST);
 		return $post;
 	}
-	
+
 	public function getRoute()
 	{
 		return $this->route;

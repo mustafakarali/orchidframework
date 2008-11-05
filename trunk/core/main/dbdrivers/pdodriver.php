@@ -41,7 +41,6 @@ class pdodriver extends abstractdbdriver
 			$this->results = array(); //clear the result cache
 			$this->affectedrows=  $this->pdo->exec($sql);
 		}
-
 		if("insert"==$type) return $this->insertId();
 		return true;
 

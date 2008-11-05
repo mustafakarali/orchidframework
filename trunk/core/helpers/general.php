@@ -88,61 +88,47 @@ function arrayToTable($Array, $NumberOfColumn=3, $Width=100, $Style=null, $CellS
 
 function createPagination($total, $callback, $numberperpage, $currentpage)
 {
-	$data = "";
-	$prevpage = $currentpage-1;
+	$start=1;
+	$end = 9;
+	echo '<ul class="pagination">';
 
-	if ($total<=$numberperpage) return "&nbsp;";
-	$lastpage = ceil($total/$numberperpage);
+	
 
-	if ($lastpage > 5 && $currentpage>3) {
-		# if middle point should be > 3
-		if ($lastpage-$currentpage>1) {
-			# if gap between middle and last is > 1
-			$middlepoint = $currentpage;
-		} else {
-			# otherwise middle should be respect to last
-			$middlepoint = $lastpage - 2;
-		}
-	} else {
-		$middlepoint = 3;
-	}
+	$pages = ceil($total/$numberperpage);
 
-	if ($middlepoint>3)
+	if($currentpage>5 && $pages>9)
 	{
-		$data .="<a href='{$callback}1'>First</a>&nbsp;&nbsp;\n";
+		$start=$currentpage-4;
+		$end = $currentpage+4;
 	}
-
+	if($end>$pages) $end = $pages;
+	if($start>1) {
+		echo "<li><a href='{$callback}1' style='cursor:pointer' >&nbsp;&lt;&lt;&nbsp;</a></li>\n";
+		//echo "<li>... ...</li>";
+	}
 	if ($currentpage>1)
 	{
-		$data .="<a href='{$callback}{$prevpage}'>Prev</a>&nbsp;&nbsp;\n";
+		$prevPage = $currentpage-1;
+		echo "<li><a href='{$callback}{$prevPage}' style='cursor:pointer' >&nbsp;&lt;&nbsp;</a></li>\n";
 	}
-
-
-	$startpoint=$middlepoint-2;
-
-	$endpoint =  ($lastpage > 5) ? $middlepoint+2 : $lastpage;
-
-	//echo $startpoint;
-	for($i=$startpoint; $i<=$endpoint; $i++)
+	for($i=$start;$i<=$end;$i++)
 	{
-		if ($i == $currentpage)
-		$data .= "<span><a href='{$callback}{$i}'><strong>{$i}</strong></a></span>";
+		$ii = numberToBUnicode($i);
+		if($i==$currentpage)
+		echo "<li><a href='{$callback}{$i}' class='active' style='cursor:pointer' >{$ii}</a></li>\n";
 		else
-		$data .= "<span><a href='{$callback}{$i}'>{$i}</a></span>";
-		if ($i < $endpoint)
-		$data .= "&nbsp;&nbsp;\n";
+		echo "<li><a href='{$callback}{$i}' style='cursor:pointer' >{$ii}</a></li>\n";
 	}
 
-	$pageid	 = $currentpage + 1;
-
-	if ($currentpage<($lastpage)){
-		$data .="<span><a href='{$callback}{$pageid}'>Next</a></span>";
+	
+	if ($currentpage<=($pages-1))
+	{
+		$nextPage = $currentpage+1;
+		echo "<li><a href='{$callback}{$nextPage}' style='cursor:pointer' >&nbsp;&gt;&nbsp;</a></li>\n";
 	}
-
-	if (($lastpage-$currentpage)>2){
-		$data .="<span><a href='{$callback}{$lastpage}'>Last</a></span>";
-	}
-	return $data;
+	//if($pages>$end) echo "<li>... ...</li>";
+	echo "<li><a href='{$callback}{$pages}' style='cursor:pointer' >&nbsp;&gt;&gt;&nbsp;</a></li>\n";
+	echo '</ul>';
 }
 
 
@@ -274,32 +260,61 @@ function getCurrentURL()
 function generatePassword ($length = 6)
 {
 
-  // start with a blank password
-  $password = "";
+	// start with a blank password
+	$password = "";
 
-  // define possible characters
-  $possible = "0123456789bcdfghjkmnpqrstvwxyz!#@"; 
-    
-  // set up a counter
-  $i = 0; 
-    
-  // add random characters to $password until $length is reached
-  while ($i < $length) { 
+	// define possible characters
+	$possible = "0123456789bcdfghjkmnpqrstvwxyz!#@";
 
-    // pick a random character from the possible ones
-    $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
-        
-    // we don't want this character if it's already in the password
-    if (!strstr($password, $char)) { 
-      $password .= $char;
-      $i++;
-    }
+	// set up a counter
+	$i = 0;
 
-  }
+	// add random characters to $password until $length is reached
+	while ($i < $length) {
 
-  // done!
-  return $password;
+		// pick a random character from the possible ones
+		$char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
 
+		// we don't want this character if it's already in the password
+		if (!strstr($password, $char)) {
+			$password .= $char;
+			$i++;
+		}
+
+	}
+
+	// done!
+	return $password;
+
+}
+
+function createAjaxPagination($total, $callback, $numberperpage, $currentpage)
+{
+	echo '<ul class="pagination">';
+
+	if ($currentpage>1)
+	{
+		$prevPage = $currentpage-1;
+		echo "<li><a href='#' style='cursor:pointer' onclick='{$callback}({$prevPage});'>Prev</a></li>\n";
+	}
+	$pages = ceil($total/$numberperpage);
+
+
+	for($i=1;$i<=$pages;$i++)
+	{
+		if($i==$currentpage)
+		echo "<li><a href='#' class='active' style='cursor:pointer' onclick='{$callback}($i);'>{$i}</a></li>\n";
+		else
+		echo "<li><a href='#' style='cursor:pointer' onclick='{$callback}($i);'>{$i}</a></li>\n";
+	}
+
+	//echo $total;
+	if ($currentpage<=($pages))
+	{
+		$nextPage = $currentpage+1;
+		echo "<li><a href='#' style='cursor:pointer' onclick='{$callback}({$nextPage});'>Next</a></li>\n";
+	}
+	echo '</ul>';
 }
 
 function isPOST()
@@ -308,4 +323,80 @@ function isPOST()
 	return true;
 	return false;
 }
+
+function def(&$var, $default)
+{
+	$var= empty($var)?$default:$var;
+}
+
+/**
+ * copied from aman's blog at mailtoaman.com
+ *
+ * @param unknown_type $text
+ * @param unknown_type $n
+ * @return unknown
+ */
+function truncate($text,$n){
+	return substr($text = substr($text,0,$n)
+	,0,
+	strrpos($text,' ')
+	);
+}
+
+function isIE()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"MSIE")!==false) return true;
+	return false;
+}
+
+function isFF()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"Firefox")!==false) return true;
+	return false;
+}
+
+function isIE6()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"MSIE 6")!==false) return true;
+	return false;
+}
+
+function isIE7()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"MSIE 7")!==false) return true;
+	return false;
+}
+
+function isOpera()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"Opera")!==false) return true;
+	return false;
+}
+
+function isFF3()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"Firefox/3")!==false) return true;
+	return false;
+}
+
+function isFF2()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"Firefox/2")!==false) return true;
+	return false;
+}
+
+function isMacintosh()
+{
+	$sa =  $_SERVER['HTTP_USER_AGENT'];
+	if(strpos($sa,"Macintosh")!==false) return true;
+	return false;
+}
+
 ?>

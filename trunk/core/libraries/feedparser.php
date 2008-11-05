@@ -184,7 +184,6 @@ class FeedParser{
 			throw new Exception("Channel tag $tagName not found.");
 			return false;
 		}
-		
 	}
    
 	/**

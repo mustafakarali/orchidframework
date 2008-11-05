@@ -23,10 +23,11 @@ class cssm
 		echo "<style type=\"text/css\"> @import \"{$basepath}/core/styles/pt.php\"; </style>";
 	}
 
-	public function addCSS($filename,$extension="css")
+	public function addCSS($filename,$extension="css",$version="")
 	{
+		if(!empty($version)) $version="?{$version}";
 		$basepath = base::baseUrl();
-		echo "<style type=\"text/css\"> @import \"{$basepath}/app/styles/{$filename}.{$extension}\"; </style>";
+		echo "<style type=\"text/css\"> @import \"{$basepath}/app/styles/{$filename}.{$extension}{$version}\"; </style>";
 	}
 
 	public function addThickBox()

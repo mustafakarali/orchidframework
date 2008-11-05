@@ -29,10 +29,13 @@ class session
 	public function __set($key, $val)
 	{
 		$_SESSION[$key]=$val;
+		//echo "<br/>$key:$val<br/>";
+		//base::backtrace();
 	}
 
 	public function start()
 	{
+		//die("start");
 		session_start();
 	}
 

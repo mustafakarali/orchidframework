@@ -30,8 +30,10 @@ class mysqlidriver extends abstractdbdriver
 		{
 			if (isset($this->results[$hash]))
 			{
-				if (is_resource($this->results[$hash]))
-				return $this->results[$hash];
+				if (is_resource($this->results[$hash])){
+					mysqli_data_seek($this->results[$hash],0);
+					return $this->results[$hash];
+				}
 			}
 		}
 		else if("update"==$type || "delete"==$type)

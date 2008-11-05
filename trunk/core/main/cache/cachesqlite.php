@@ -40,12 +40,12 @@ class cachesqlite implements cachemanager
 
 	public function set($key, $value, $time=86400)
 	{
-
+		$this->invalidate($key,true);
 		$modified = time();
 		$valid = time()+$time;
 		$content = serialize(array($key=>$value));
 		$marker = $key;
-		$query = "REPLACE INTO cache (marker, content, valid, modified) values('{$marker}', '{$content}','{$valid}','{$modified}')";
+		$query = "INSERT INTO cache (marker, content, valid, modified) values('{$marker}', '{$content}','{$valid}','{$modified}')";
 		sqlite_query($query, $this->cachedb);
 		$this->cache[$key]==$value;
 	}
