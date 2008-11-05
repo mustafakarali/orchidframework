@@ -17,7 +17,10 @@ class dispatcher
 		if ($config->session_auto_start)
 		{
 			$session = loader::load("session");
-			$session->start;
+			//if (isset($_REQUEST['PHPSESSID'])) {
+				//session_id($_REQUEST['PHPSESSID']);
+			//}
+			$session->start();
 		}
 
 		$char_encoding = $config->char_encoding;
@@ -41,10 +44,10 @@ class dispatcher
 			$controllerfile = "app/controllers/{$controller}.php";
 			if (!file_exists($controllerfile)){
 				//check for catch_all_controller
-				$catchAllController = $config->catch_all_controller;				
+				$catchAllController = $config->catch_all_controller;
 				if (empty($catchAllController))
-				throw new Exception("Controller not found");
-				else 
+				throw new Exception("Controller [{$controller}] not found. Referrer was {$_SERVER['HTTP_REFERER']}");
+				else
 				{
 					//here the fun begins
 					$_controller = $controller;
@@ -53,20 +56,20 @@ class dispatcher
 				}
 			}
 			require_once($controllerfile);
-			$app = new $controller();
+			$app = new $controller($params);
 			if ($catchAllController)
 			{
 				$app->catchAllController = $_controller;
 				$app->catchAllAction=$action;
 				$action="catchAll";
 			}
-			
+
 			$helper = loader::load("helper");
 			$cm = $helper->common; //load the common helper from app directory
-			
+
 			$app->setParams($params);
 			$app->setPostParams($router->getPostParams());
-			
+
 			//add pre action hook execution
 			$preActionHooks = $app->getPreActionHooks();
 			if(!empty($preActionHooks))
@@ -78,7 +81,7 @@ class dispatcher
 			$app->use_layout = $config->use_layout;
 			$app->$action();
 
-			
+
 			//add post action hook execution
 			$postActionHooks = $app->getPostActionHooks();
 			if(!empty($postActionHooks))
@@ -86,7 +89,7 @@ class dispatcher
 				foreach ($postActionHooks as $postHook)
 				$app->$postHook();
 			}
-			
+
 			//check if the controller calls for a redirect
 			if(empty($app->redirectcontroller))
 			$redirect=false;
@@ -117,7 +120,7 @@ class dispatcher
 		$view = loader::load("view");
 		$view->set("_errors",$app->getError());
 		$viewvars = $view->getVars($app);
-		
+
 		$uselayout=$app->use_layout; //modified june 21 for easy overriding via any controller
 
 		if (!empty($app->template))

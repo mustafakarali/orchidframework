@@ -60,14 +60,16 @@ class jsm
 	 *
 	 * @param string $filename
 	 */
-	function loadScript($filename)
+	function loadScript($filename, $version)
 	{
+		if (!empty($version))
+		$versionString = "?v={$version}";
 		$base = base::baseUrl();
 		$script = $base."/app/js/{$filename}.js";
 		if ($this->gzipenabled)
 		echo "<script type='text/javascript' src='{$base}/app/js/gzip.php?js={$script}' ></script>\n";
 		else 
-		echo "<script type='text/javascript' src='{$script}' ></script>\n";
+		echo "<script type='text/javascript' src='{$script}{$versionString}' ></script>\n";
 
 	}
 
@@ -139,7 +141,7 @@ class jsm
 	{
 		$base = base::baseUrl();
 		echo "<script type='text/javascript'>";
-		echo "var baseurl='{$base}';";
+		echo "var baseurl=\"{$base}\";";
 		echo "</script>";
 	}
 

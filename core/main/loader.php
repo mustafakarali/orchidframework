@@ -31,7 +31,8 @@ class loader
 		"cssm",
 		"helper",
 		"bookmark",
-		"cache");
+		"cache",
+		"widget");
 
 		if (!in_array($object,$valid))
 		{
@@ -48,7 +49,7 @@ class loader
 			self::$loaded[$object]= new $object();
 		}
 		return self::$loaded[$object];
-
+		
 	}
 
 }

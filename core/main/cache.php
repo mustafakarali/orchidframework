@@ -49,5 +49,10 @@ class cache
 	{
 	 	return  $this->cacheengine->invalidate($key, $forced);
 	}
+	
+	public function delete($key)
+	{
+		$this->invalidate($key,true);
+	}
 }
 ?>

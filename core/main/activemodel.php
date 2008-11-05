@@ -23,17 +23,15 @@ class activemodel
 
 	public function delete($condition="",$primary="id")
 	{
-		//print_r($this);
+		///echo $condition;
+		//echo $tablename;
 		$tablename = $this->tableName();
 		$this->modified=time();
 		$db = loader::load("db");
-		//$db->execute("show fields from {$tablename}");
-		//echo $db->count();
 		$dbfields = $db->getFields($tablename);
 		$fields=$values=array();
 		foreach($dbfields as $fieldname)
 		{
-			//$f$fields[]= $fieldname;
 			$values[] = $fieldname." = ".(!isset($this->{$fieldname})?'null':"'{$this->$fieldname}'");
 		}
 		if (empty($condition)){
@@ -47,20 +45,14 @@ class activemodel
 		}
 		else
 		$query = "DELETE FROM {$tablename} WHERE {$condition}";
-
-
-		$result = $db->execute($query);
 		//die($query);
-
-		//die($tablename);
+		$result = $db->execute($query);
 	}
 	public function insert()
 	{
 		$tablename = $this->tableName();
-		$this->created=time()+13*60*60;
+		$this->created=time();//+13*60*60;
 		$db = loader::load("db");
-		//$db->execute("show fields from {$tablename}");
-		//echo $db->count();
 		$dbfields = $db->getFields($tablename);
 		$fields=$values=array();
 		foreach($dbfields as $fieldname)
@@ -69,25 +61,20 @@ class activemodel
 			$values[] = !isset($this->{$fieldname})?'null':"'{$this->$fieldname}'";
 		}
 		$query = "INSERT INTO {$tablename}(".join(",",$fields).") VALUES(".join(",",$values).")";
-		echo("<br/>".$query);
+		//echo("<br/>".$query);
 		$insertId = $db->execute($query);
 		return $insertId;
-		//die($query);
 	}
 
 	public function update($condition=null,$primary="id")
 	{
-		//print_r($this);
 		$tablename = $this->tableName();
-		$this->modified=time()+13*60*60;
+		$this->modified=time();//+13*60*60;
 		$db = loader::load("db");
-		//$db->execute("show fields from {$tablename}");
-		//echo $db->count();
 		$dbfields = $db->getFields($tablename);
 		$fields=$values=array();
 		foreach($dbfields as $fieldname)
 		{
-			//$f$fields[]= $fieldname;
 			$values[] = $fieldname." = ".(!isset($this->{$fieldname})?'null':"'{$this->$fieldname}'");
 		}
 		if (empty($condition)){
@@ -101,12 +88,9 @@ class activemodel
 		}
 		else
 		$query = "UPDATE {$tablename} SET ".join(",",$values)." WHERE {$condition}";
-
-
 		$result = $db->execute($query);
-		//die($query);
-
-		//die($tablename);
+		//echo "<br/>{$query}";
+		//echo mysql_error();
 	}
 
 	public function find($conditions, $limit=1, $orderby=null)
@@ -128,7 +112,7 @@ class activemodel
 		$query = "SELECT * FROM {$tablename}  {$clause} LIMIT {$limit}";
 		$results=array();
 		$db->execute($query);
-		//echo $query;
+		//echo "<br/>Find:".$query;
 		if ($db->count()==0)
 		return array();
 
@@ -146,9 +130,6 @@ class activemodel
 			}
 			$results = $results[0]; //for accessing like getName(), getField()
 		}
-
-		//base::pr($results);
-		//die();
 		$this->results = $results;
 		return $results;
 
@@ -173,12 +154,10 @@ class activemodel
 		$query = "SELECT * FROM {$tablename}  {$clause} LIMIT {$limit}";
 		$results=array();
 		$_results=array();
+		//die($query);
 		$db->execute($query);
-		//echo "<br/>".$stmt;
 		if ($limit==0)
 		$limit = $db->count();
-		//else
-		//$limit=$db->count()>$limit?$limit:$db->count();
 		if ($limit==0)
 		return array();
 
@@ -196,9 +175,6 @@ class activemodel
 			}
 			$results = $_results[0]; //for accessing like getName(), getField()
 		}
-
-		//base::pr($results);
-		//die();
 		if (!empty($results))
 		$this->results = $results;
 		return $_results;
@@ -309,13 +285,10 @@ class activemodel
 
 		$results=array();
 		$_results=array();
-		//die($stmt);
 		$db->execute($stmt);
-		//echo "<br/>".$stmt;
+		//echo $stmt;
 		if ($limit==0)
 		$limit = $db->count();
-		//else
-		//$limit=$db->count()>$limit?$limit:$db->count();
 		if ($limit==0)
 		return array();
 
@@ -333,14 +306,12 @@ class activemodel
 			}
 			$results = $_results[0]; //for accessing like getName(), getField()
 		}
-
-		//base::pr($results);
-		//die();
 		if (!empty($results))
 		$this->results = $results;
 		return $_results;
 	}
 
+	
 
 }
 ?>
