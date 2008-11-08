@@ -168,3 +168,4 @@ function getWindowDimensions()
 	var dimensions = new Array(myWidth, myHeight);
 	return dimensions;
 }
+

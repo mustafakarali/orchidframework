@@ -92,7 +92,7 @@ function createPagination($total, $callback, $numberperpage, $currentpage)
 	$end = 9;
 	echo '<ul class="pagination">';
 
-	
+
 
 	$pages = ceil($total/$numberperpage);
 
@@ -120,7 +120,7 @@ function createPagination($total, $callback, $numberperpage, $currentpage)
 		echo "<li><a href='{$callback}{$i}' style='cursor:pointer' >{$ii}</a></li>\n";
 	}
 
-	
+
 	if ($currentpage<=($pages-1))
 	{
 		$nextPage = $currentpage+1;
@@ -397,6 +397,14 @@ function isMacintosh()
 	$sa =  $_SERVER['HTTP_USER_AGENT'];
 	if(strpos($sa,"Macintosh")!==false) return true;
 	return false;
+}
+
+function getFeedParsedByGoogle($url, $items=5, $nocache=0)
+{
+	$feedurl = "http://www.google.com/uds/Gfeeds?num={$items}&hl=en&output=json&q=".urlencode($url)."&v=1.0&nocache={$nocache}";
+	$filedata = file_get_contents($feedurl);
+	$djson = json_decode($filedata);
+	return $djson;
 }
 
 ?>
