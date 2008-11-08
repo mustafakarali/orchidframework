@@ -130,7 +130,7 @@ class dispatcher
 
 		if ($app->use_view==true){
 			base::_loadTemplate($controller, $template, $viewvars, $uselayout);
-			$app->cssm->addCoreCSS();
+			//$app->cssm->addCoreCSS();
 		}
 		else
 		echo trim($rawoutput);
