@@ -33,4 +33,6 @@ $configs['facebook_secret_key'] = "App Secret Key";
 $configs['facebook_app_url'] = "App facebook url, with trailing slash";
 $configs['facebook_callback_url'] = "App Callback Url - with trailing slash";
 
+$configs['s3_key']= "";
+$configs['s3_secret'] = "";
 ?>

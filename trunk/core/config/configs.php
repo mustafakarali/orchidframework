@@ -66,4 +66,7 @@ $configs['catch_all_controller'] = "home";
 
 $configs['base_url']=str_replace("/index.php","",$_SERVER['PHP_SELF'])."";
 $configs['base_url']="http://prothom-aloblog.com/";
+
+$configs['s3_key']= "";
+$configs['s3_secret'] = "";
 ?>
