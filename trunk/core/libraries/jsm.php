@@ -160,5 +160,37 @@ class jsm
 		else
 		echo "<script type='text/javascript' src='{$base}/core/js/ie8.js' ></script>\n";
 	}
+	
+	function addjQueryFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' ></script>\n";
+	}
+	
+	function addjQueryUIFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js' ></script>\n";
+	}
+	function addPrototypeFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js' ></script>\n";
+	}
+	function addScriptaculousFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js' ></script>\n";
+	}
+	function addMootoolsFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/mootools/1.11/mootools-yui-compressed.js' ></script>\n";
+	}
+	function addDojoFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/dojo/1.2.0/dojo/dojo.xd.js' ></script>\n";
+	}
 }
 ?>

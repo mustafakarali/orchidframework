@@ -376,6 +376,4 @@ class GMap{
 
 
 }//End Of Class
-
-
 ?>
