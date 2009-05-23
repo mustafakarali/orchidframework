@@ -8,18 +8,27 @@
  */
 class lang
 {
-	private $lang;
-	function __construct()
-	{
-		global $langs;
-		include_once("app/config/langs.php");
-		$this->lang = $langs;
-	}
-	
-	private function __get($var)
-	{
-		return $this->lang[$var];
-	}
+    private $lang;
+    function __construct($lang)
+    {
+        global $langs;
+        if(empty($lang))
+        include_once("app/config/langs.php");
+        else
+        include_once("app/config/langs.{$lang}.php");
+        $this->lang = $langs;
+    }
+
+    private function __get($var)
+    {
+        return $this->lang[$var];
+    }
+
+    public function loadLang($lang)
+    {
+        include("app/config/langs.{$lang}.php");
+        $this->lang = $langs;
+    }
 }
 
 ?>
