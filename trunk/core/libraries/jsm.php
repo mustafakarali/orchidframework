@@ -10,7 +10,7 @@
 class jsm
 {
 	private $gzipenabled = false;
-	function loadPrototype()
+	/*function loadPrototype()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
@@ -25,17 +25,17 @@ class jsm
 		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js' ></script>\n";
 		else
 		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js' ></script>\n";
-	}
+	}*/
 	
-	function addAccordion()
+	/*function addAccordion()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
 		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=accordion.js' ></script>\n";
 		else
 		echo "<script type='text/javascript' src='{$base}/core/js/accordion.js' ></script>\n";
-	}
-	function loadProtaculous()
+	}*/
+	/*function loadProtaculous()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled){
@@ -51,10 +51,10 @@ class jsm
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
-		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' ></script>\n";
+		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' ></script>\n";
 		else
-		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' ></script>\n";
-	}
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' ></script>\n";
+	}*/
 	/**
 	 * app specific libraries
 	 *
@@ -73,7 +73,7 @@ class jsm
 
 	}
 
-	function loadButtonJS()
+	/*function loadButtonJS()
 	{
 		$this->loadJquery();
 		?>
@@ -95,16 +95,16 @@ class jsm
 
 		</script>
 		<?
-	}
+	}*/
 	
-	function addSWFObject()
+	/*function addSWFObject()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
 		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=swfobject.js' ></script>\n";
 		else
 		echo "<script type='text/javascript' src='{$base}/core/js/swfobject.js' ></script>\n";
-	}
+	}*/
 	
 	function addOrchidHelper()
 	{
@@ -115,7 +115,7 @@ class jsm
 		echo "<script type='text/javascript' src='{$base}/core/js/general.php' ></script>\n";
 	}
 	
-	function addPNGFix()
+	/*function addPNGFix()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
@@ -135,7 +135,7 @@ class jsm
 		
 		$lib = loader::load("library");
 		$lib->cssm->addThickBox();
-	}
+	}*/
 	
 	function addGenericVars()
 	{
@@ -152,25 +152,25 @@ class jsm
 		$this->addGenericVars();
 	}
 	
-	function addIE8()
+	/*function addIE8()
 	{
 		$base = base::baseUrl();
 		if ($this->gzipenabled)
 		echo "<script type='text/javascript' src='{$base}/core/js/gzip.php?js=ie8.js' ></script>\n";
 		else
 		echo "<script type='text/javascript' src='{$base}/core/js/ie8.js' ></script>\n";
-	}
+	}*/
 	
 	function addjQueryFromGoogle()
 	{
 		$base = base::baseUrl();
-		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js' ></script>\n";
 	}
 	
 	function addjQueryUIFromGoogle()
 	{
 		$base = base::baseUrl();
-		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.2/jquery-ui.min.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js' ></script>\n";
 	}
 	function addPrototypeFromGoogle()
 	{
@@ -180,17 +180,27 @@ class jsm
 	function addScriptaculousFromGoogle()
 	{
 		$base = base::baseUrl();
-		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.1/scriptaculous.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.2/scriptaculous.js' ></script>\n";
 	}
 	function addMootoolsFromGoogle()
 	{
 		$base = base::baseUrl();
-		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/mootools/1.11/mootools-yui-compressed.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/mootools/1.2.2/mootools-yui-compressed.js' ></script>\n";
 	}
 	function addDojoFromGoogle()
 	{
 		$base = base::baseUrl();
-		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/dojo/1.2.0/dojo/dojo.xd.js' ></script>\n";
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/dojo/1.3.1/dojo/dojo.xd.js' ></script>\n";
+	}
+	function addSWFObjectFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/swfobject/2.1/swfobject.js' ></script>\n";
+	}
+	function addYahooUIFromGoogle()
+	{
+		$base = base::baseUrl();
+		echo "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/yui/2.7.0/build/yuiloader/yuiloader-min.js' ></script>\n";
 	}
 }
 ?>
