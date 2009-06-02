@@ -47,6 +47,7 @@ class base{
 		}
 
 		if ($uselayout) {
+		    //die("using layout)");
 			$layoutdata = ob_get_clean();
 			$layoutfilelocal = "app/views/{$controller}/{$controller}.php";
 			$layoutfileglobal = "app/views/layouts/{$controller}.php";
@@ -55,6 +56,8 @@ class base{
 			include_once($layoutfilelocal);
 			else if (file_exists($layoutfileglobal))
 			include_once($layoutfileglobal);
+			else 
+			echo $layoutdata;
 		}
 	}
 
