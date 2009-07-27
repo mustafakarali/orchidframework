@@ -1,4 +1,14 @@
 <?php
+/**
+ * CREATE TABLE `cache` (
+    `marker` varchar(250) character set latin1 NOT NULL,
+    `content` text character set latin1,
+    `valid` int(11) default NULL,
+    `modified` int(11) default NULL,
+    KEY `newindex` (`valid`),
+    KEY `im` (`marker`)
+    )  ENGINE=MyISAM
+ */
 include_once("interface/interface.cache.php");
 class cachemysql implements cachemanager
 {
