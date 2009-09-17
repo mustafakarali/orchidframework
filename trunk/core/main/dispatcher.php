@@ -24,7 +24,7 @@ class dispatcher
 		}
 
 		$char_encoding = $config->char_encoding;
-		if (empty($char_encoding)) $char_encoding="iso-8859-1";
+		if (empty($char_encoding)) $char_encoding="utf-8";
 		header("Content-Type: text/html; charset={$char_encoding}");
 
 		if ($config->global_profile) $start = microtime(true);
