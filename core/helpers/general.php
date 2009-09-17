@@ -50,6 +50,7 @@ function arrayToTable($Array, $NumberOfColumn=3, $Width=100, $Style=null, $CellS
 	$data = "<table align='{$align}' width='{$Width}%' cellspacing={$CellSpacing} cellpadding={$CellPadding} style='{$Style}'>";
 
 
+	$tdwidth = 100/$NumberOfColumn;
 	$ActualRow = ceil(count($Array)/$NumberOfColumn)*$NumberOfColumn;
 	//echo $ActualRow;
 	for ($i=1; $i<=$ActualRow; $i++)
@@ -70,9 +71,9 @@ function arrayToTable($Array, $NumberOfColumn=3, $Width=100, $Style=null, $CellS
 		if ($i<=count($Array))
 		{
 			if (empty($urls))
-			$data.="<td valign='top' style='{$tdstyle}'>{$Array[$i-1]}</td>";
+			$data.="<td valign='top' width='{$tdwidth}%' style='{$tdstyle}' >{$Array[$i-1]}</td>";
 			else
-			$data.="<td valign='top' style='{$tdstyle}'><a href=\"{$urls[$i-1]}\">{$Array[$i-1]}</a></td>";
+			$data.="<td valign='top' width='{$tdwidth}%' style='{$tdstyle}'><a href=\"{$urls[$i-1]}\">{$Array[$i-1]}</a></td>";
 
 		}
 
