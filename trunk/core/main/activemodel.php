@@ -46,7 +46,7 @@ class activemodel
 		else
 		$query = "DELETE FROM {$tablename} WHERE {$condition}";
 		//die($query);
-		$result = $db->execute($query);
+		return $db->execute($query);
 	}
 	public function insert()
 	{
@@ -88,7 +88,7 @@ class activemodel
 		}
 		else
 		$query = "UPDATE {$tablename} SET ".join(",",$values)." WHERE {$condition}";
-		$result = $db->execute($query);
+		return  $db->execute($query);
 		//echo "<br/>{$query}";
 		//echo mysql_error();
 	}
@@ -257,7 +257,7 @@ class activemodel
 			$tableName = $this->tableName();
 			$query = "UPDATE {$tableName} SET {$values} WHERE {$primarykey} = '{$this->results[$primarykey]}' ";
 			$db = loader::load("db");
-			$db->execute($query);
+			return $db->execute($query);
 		}
 	}
 
