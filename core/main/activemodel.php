@@ -14,11 +14,13 @@ class activemodel
 
 	public function clean()
 	{
-		$properties = get_class_vars(get_class($this));
+		$tablename = $this->tablename;
+	        $properties = get_class_vars(get_class($this));
 		foreach ($properties as $prop=>$val)
 		{
 			unset($this->$prop);
 		}
+		$this->tablename = $tablename;
 	}
 
 	public function delete($condition="",$primary="id")
