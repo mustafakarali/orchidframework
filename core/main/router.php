@@ -58,6 +58,7 @@ class router
 					array_shift($newrouteparts);
 					array_shift($newrouteparts);
 					$this->params=$newrouteparts;
+					break;
 				}
 			}
 		}
