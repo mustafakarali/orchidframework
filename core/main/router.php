@@ -33,7 +33,7 @@ class router
 		$route = preg_replace($sanitzing_pattern, "", $route);
 		$route = str_replace("^","",$route);
 		$this->route = $route;
-
+                        echo $route;
 		$routParts = split( "/",$route);
 		$this->controller=$routParts[0];
 		$this->action=isset($routParts[1])? $routParts[1]:"base";
@@ -49,9 +49,15 @@ class router
 				$_destination = $_route[1];
 				if (preg_match($_pattern,$route))
 				{
-					$newrouteparts = split("/",$_destination);
+				            $newroute = preg_replace($_pattern, "{$_destination}",$route);
+					//$newrouteparts = split("/",$_destination);
+					$newrouteparts = split("/",$newroute);
+					base::pr($newrouteparts);
 					$this->controller = $newrouteparts[0];
 					$this->action = $newrouteparts[1];
+					array_shift($newrouteparts);
+					array_shift($newrouteparts);
+					$this->params=$newrouteparts;
 				}
 			}
 		}
