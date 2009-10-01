@@ -52,7 +52,7 @@ class router
 				            $newroute = preg_replace($_pattern, "{$_destination}",$route);
 					//$newrouteparts = split("/",$_destination);
 					$newrouteparts = split("/",$newroute);
-					base::pr($newrouteparts);
+					//base::pr($newrouteparts);
 					$this->controller = $newrouteparts[0];
 					$this->action = $newrouteparts[1];
 					array_shift($newrouteparts);
