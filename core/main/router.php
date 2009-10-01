@@ -33,7 +33,7 @@ class router
 		$route = preg_replace($sanitzing_pattern, "", $route);
 		$route = str_replace("^","",$route);
 		$this->route = $route;
-                        echo $route;
+                //echo $route;
 		$routParts = split( "/",$route);
 		$this->controller=$routParts[0];
 		$this->action=isset($routParts[1])? $routParts[1]:"base";
