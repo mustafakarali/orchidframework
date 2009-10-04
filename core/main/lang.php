@@ -12,9 +12,9 @@ class lang
     function __construct($lang)
     {
         global $langs;
-        if(empty($lang))
+        if(empty($lang) && file_exists("app/config/langs.php"))
         include_once("app/config/langs.php");
-        else
+        else if(file_exists("app/config/langs.{$lang}.php"))
         include_once("app/config/langs.{$lang}.php");
         $this->lang = $langs;
     }
@@ -26,8 +26,15 @@ class lang
 
     public function loadLang($lang)
     {
-        include("app/config/langs.{$lang}.php");
-        $this->lang = $langs;
+        $langfile = "app/config/langs.{$lang}.php";
+        if(!file_exists($langfile))
+        {
+            throw new Exception("Language app/config/langs.{$lang}.php not found");
+        }
+        else{
+            include($langfile);
+            $this->lang = $langs;
+        }
     }
 }
 
