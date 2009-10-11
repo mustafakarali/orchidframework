@@ -33,6 +33,14 @@ class base{
 	}
 
 	public static function _loadTemplate($controller, $template, $vars, $uselayout=false){
+		global $debug, $debugparts;
+		if($debug)
+		{
+		    $_vars = $vars;
+		    unset($_vars["app"]);
+		    unset($_vars["lang"]);
+		    $debugparts[] = array("type"=>"view","value"=>array("viewfile"=>$template,"controller"=>$controller,"params"=>$_vars,"layout"=>$uselayout));
+		}
 		extract($vars);
 		$baseurl = base::baseUrl();
 		if ($uselayout)

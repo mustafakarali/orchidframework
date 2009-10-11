@@ -11,7 +11,7 @@ class dispatcher
 {
 	public static function dispatch($router)
 	{
-		global $app;
+		global $app, $debug, $debugparts;
 		ob_start();
 		$config = loader::load("config");
 		if ($config->session_auto_start)
@@ -137,8 +137,13 @@ class dispatcher
 
 		if (isset($start))
 		echo "<div style='clear:both;'><p style='padding-top:25px;' >Total time for dispatching is : ".(microtime(true)-$start)." seconds.</p></div>";
+		if($debug){
+		      if($config->debugdetails)
+		      base::pr($debugparts);
+		}
 		$output = ob_get_clean();
 		echo trim($output);
+		
 
 	}
 }

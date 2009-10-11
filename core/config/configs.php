@@ -1,6 +1,6 @@
 <?php
 $configs['debug']="on";
-
+$configs['debugdetails']=false;
 
 $configs['autoload_prototype']=false;
 $configs['autoload_scriptaculous']=false;
@@ -47,7 +47,7 @@ $configs['db']['test']['dbpwd']="";
 $configs['db']['test']['persistent']="";
 $configs['db']['test']['dbtype']="";
 
-$configs['db']['development']['dbname']="palo";
+$configs['db']['development']['dbname']="test";
 $configs['db']['development']['dbhost']="localhost";
 $configs['db']['development']['dbuser']="root";
 $configs['db']['development']['dbpwd']="";
@@ -65,7 +65,7 @@ $configs['session_auto_start'] = false;
 $configs['catch_all_controller'] = "home";
 
 $configs['base_url']=str_replace("/index.php","",$_SERVER['PHP_SELF'])."";
-$configs['base_url']="http://prothom-aloblog.com/";
+//$configs['base_url']="http://domain.com/";
 
 $configs['s3_key']= "";
 $configs['s3_secret'] = "";
