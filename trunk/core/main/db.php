@@ -54,7 +54,14 @@ class db
 
 	private function __call($method, $args)
 	{
+		global $debugparts, $debug;
 		if (empty($this->dbengine)) return 0;
+		
+		if($method=="execute" && $debug)
+		{
+		    $debugparts[] = array("type"=>"SQL","value"=>$args[0]);
+		}
+		
 		if (!method_exists($this, $method)){
 			if ($method=="execute")
 			self::$latestquery = $args[0];

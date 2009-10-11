@@ -6,6 +6,8 @@
  * @copyright 	New BSD License
  * @version 	0.1	
  */
+global $debug;
+global $debugparts;
 class router
 {
 	private $route;
@@ -14,7 +16,8 @@ class router
 	private $params;
 	public function __construct()
 	{
-		if(file_exists("app/config/routes.php")){
+		global $debug;
+	            if(file_exists("app/config/routes.php")){
 			include_once("app/config/routes.php");
 		}
 
@@ -61,6 +64,10 @@ class router
 					break;
 				}
 			}
+		}
+		if($this->params[count($this->params)-1]=="debug") {
+		    $debug = true;
+		    //die(Debug);
 		}
 	}
 
